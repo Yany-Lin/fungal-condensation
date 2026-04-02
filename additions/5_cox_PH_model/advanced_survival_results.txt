@@ -1,0 +1,64 @@
+ADVANCED SURVIVAL ANALYSIS — RESULTS SUMMARY
+============================================================
+
+Total droplets loaded: 158,956 (25,878 events, 133,078 censored)
+Trials with δ: 35
+Subset with measured R₀: 158,956
+
+1. AFT MODEL COMPARISON  (R₀ subset)
+----------------------------------------
+           Model  log-lik  k      AIC   ΔAIC
+     Weibull AFT -82412.9  4 164833.8    0.0
+Log-Logistic AFT -84113.1  4 168234.2 3400.4
+  Log-Normal AFT -87272.1  4 174552.2 9718.4
+
+Best AFT (Weibull AFT): each mm further from source multiplies median lifetime by 1.102
+
+Weibull AFT full summary:
+                       coef  exp(coef)  se(coef)  coef lower 95%  coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%  cmp to        z      p  -log2(p)
+param   covariate                                                                                                                                           
+lambda_ distance_mm  0.0972     1.1020    0.0025          0.0923          0.1020               1.0967               1.1074  0.0000  39.0959 0.0000       inf
+        log_R0_um   -0.3444     0.7086    0.0057         -0.3555         -0.3334               0.7008               0.7165  0.0000 -60.9015 0.0000       inf
+        Intercept    3.5833    35.9931    0.0193          3.5456          3.6211              34.6588              37.3788  0.0000 185.9141 0.0000       inf
+rho_    Intercept    1.0389     2.8260    0.0044          1.0302          1.0475               2.8016               2.8506  0.0000 234.8008 0.0000       inf
+
+Cox PH HR for distance: 0.7561
+
+2. SIZE-STRATIFIED SURVIVAL  (R₀ subset)
+----------------------------------------
+Size tercile boundaries: 9.7, 21.8 μm
+Distance split at median: 1.75 mm
+
+3. TIME-VARYING DISTANCE EFFECT  (full pool)
+----------------------------------------
+Period  n_at_risk     HR  HR_lo  HR_hi    coef      p
+ early     158956 0.2924 0.2620 0.3263 -1.2297 0.0000
+middle      95240 0.5115 0.4881 0.5361 -0.6703 0.0000
+  late      52986 0.8708 0.8591 0.8827 -0.1383 0.0000
+
+4. MEGA-MODEL  (full pool, distance + δ)
+----------------------------------------
+N = 158,956
+                  coef  exp(coef)  se(coef)  coef lower 95%  coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%  cmp to        z      p  -log2(p)
+covariate                                                                                                                                              
+distance_mm_z  -0.3195     0.7265    0.0069         -0.3330         -0.3060               0.7167               0.7364  0.0000 -46.3652 0.0000       inf
+log_delta_z     0.5529     1.7384    0.0062          0.5408          0.5651               1.7174               1.7596  0.0000  89.1467 0.0000       inf
+dist_x_delta_z -0.1728     0.8413    0.0069         -0.1863         -0.1593               0.8301               0.8528  0.0000 -25.0936 0.0000  459.2007
+
+Mega-model with R₀ (N = 158,956):
+                  coef  exp(coef)  se(coef)  coef lower 95%  coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%  cmp to        z      p  -log2(p)
+covariate                                                                                                                                              
+distance_mm_z  -0.3676     0.6924    0.0071         -0.3815         -0.3537               0.6828               0.7021  0.0000 -51.8275 0.0000       inf
+log_R0_um_z     0.5049     1.6569    0.0098          0.4856          0.5242               1.6252               1.6892  0.0000  51.2856 0.0000       inf
+log_delta_z     0.4630     1.5889    0.0064          0.4506          0.4755               1.5692               1.6088  0.0000  72.7165 0.0000       inf
+dist_x_delta_z -0.1876     0.8290    0.0069         -0.2011         -0.1740               0.8179               0.8403  0.0000 -27.2002 0.0000  538.7817
+
+5. CONCORDANCE INDEX COMPARISON  (R₀ subset)
+----------------------------------------
+                Model  C-index
+    (a) Distance only   0.6113
+          (b) R₀ only   0.6289
+    (c) Distance + R₀   0.6752
+(d) Distance + R₀ + δ   0.7243
+
+Distance only on full pool (N=158,956): C = 0.6113

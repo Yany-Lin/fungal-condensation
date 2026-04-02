@@ -1,0 +1,49 @@
+ANCOVA UNIVERSALITY TESTS — machine-readable summary
+
+
+============================================================
+Metric: dτ₅₀/dr
+============================================================
+
+2-group ANOVA table:
+                                                            sum_sq    df          F        PR(>F)
+C(system_type, Treatment(reference='Hydrogel'))           0.006920   1.0   0.064013  8.019317e-01
+delta_um                                                  7.085973   1.0  65.551083  3.829910e-09
+delta_um:C(system_type, Treatment(reference='Hydrogel'))  0.617010   1.0   5.707847  2.315975e-02
+Residual                                                  3.351053  31.0        NaN           NaN
+
+Chow test: F=2.885930, p=0.070895
+
+Slope z-test: z=2.321961, p=0.020235
+  Hydrogel slope=0.002155 ± 0.000249
+  Fungi slope=-0.000293 ± 0.001024
+
+TOST: margin=±0.000609, p_tost=0.954470
+
+============================================================
+Metric: zone_metric
+============================================================
+
+2-group ANOVA table:
+                                                            sum_sq    df           F        PR(>F)
+C(system_type, Treatment(reference='Hydrogel'))           0.033580   1.0    1.526654  2.258972e-01
+delta_um                                                  5.809535   1.0  264.116165  1.015171e-16
+delta_um:C(system_type, Treatment(reference='Hydrogel'))  0.094427   1.0    4.292888  4.667941e-02
+Residual                                                  0.681880  31.0         NaN           NaN
+
+Chow test: F=2.909771, p=0.069485
+
+Slope z-test: z=1.922590, p=0.054532
+  Hydrogel slope=0.001873 ± 0.000107
+  Fungi slope=0.000916 ± 0.000486
+
+TOST: margin=±0.000563, p_tost=0.783184
+
+
+============================================================
+Pearson / Spearman correlations
+============================================================
+                         label  pearson_r    pearson_p  spearman_rho   spearman_p  n
+        Panel 3D: dτ₅₀/dr vs δ   0.833950 4.929450e-10      0.731653 5.929130e-07 35
+    Panel 3E: zone_metric vs δ   0.951447 1.875912e-18      0.864146 2.276776e-11 35
+Leaf: r vs dR/dr (cross-trial)   0.238829 6.485679e-01      0.142857 7.871720e-01  6

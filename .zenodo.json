@@ -1,0 +1,40 @@
+{
+  "title": "Fungal Hyphae as Distributed Hygroscopic Vapor Sinks",
+  "upload_type": "software",
+  "description": "Analysis code, processed data, and figure generation scripts for: Fungal Hyphae as Distributed Hygroscopic Vapor Sinks. Includes hydrogel calibration experiments (20 trials), fungal tracking pipelines (15 trials), wheat stripe rust (RSR) leaf condensation analysis (6 leaves), and Kaplan-Meier survival analysis of droplet lifetimes.",
+  "creators": [
+    {
+      "name": "Lin, Yan Jun",
+      "affiliation": "Cornell University",
+      "orcid": "0009-0007-4761-5298"
+    },
+    {
+      "name": "Feng, Leyun",
+      "affiliation": "Cornell University"
+    },
+    {
+      "name": "Khan, Awais",
+      "affiliation": "Cornell University"
+    },
+    {
+      "name": "Park, Kyoo-Chul",
+      "orcid": "0000-0003-2630-0688"
+    },
+    {
+      "name": "Jung, Sunghwan",
+      "affiliation": "Cornell University"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "fungal hygroscopy",
+    "condensation",
+    "droplet evaporation",
+    "wheat stripe rust",
+    "Kaplan-Meier survival analysis",
+    "water activity",
+    "leaf surface",
+    "microscopy image analysis"
+  ],
+  "notes": "Raw microscopy images and ilastik probability maps are archived on Zenodo (DOI: 10.5281/zenodo.18968891). Processed CSVs sufficient to reproduce all figures are included in this repository."
+}
