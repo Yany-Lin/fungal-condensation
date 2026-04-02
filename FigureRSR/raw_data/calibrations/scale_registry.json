@@ -1,0 +1,18 @@
+{
+  "description": "Master scale registry for all RSR samples. Updated as new calibrations are provided.",
+  "scales": {
+    "RSR1":  { "scale_um_per_px": 2.0960, "notes": "3338 px = 7 mm", "has_boundary": true },
+    "RSR2":  { "scale_um_per_px": 2.1200, "notes": "3774 px = 8 mm", "has_boundary": true },
+    "RSR3":  { "scale_um_per_px": 2.1198, "notes": "from rsr3.json", "has_boundary": true },
+    "RSR4":  { "scale_um_per_px": null, "notes": "not calibrated yet", "has_boundary": false },
+    "RSR5":  { "scale_um_per_px": 2.1198, "notes": "from rsr5.json", "has_boundary": true },
+    "RSR6":  { "scale_um_per_px": 2.1198, "notes": "from rsr6.json", "has_boundary": true },
+    "RSR7":  { "scale_um_per_px": null, "notes": "not calibrated yet", "has_boundary": false },
+    "RSR8":  { "scale_um_per_px": null, "notes": "not calibrated yet", "has_boundary": false },
+    "RSR9":  { "scale_um_per_px": null, "notes": "not calibrated yet", "has_boundary": false },
+    "RSR10": { "scale_um_per_px": 2.1198, "notes": "from rsr10.json", "has_boundary": true },
+    "RSR11": { "scale_um_per_px": null, "notes": "not calibrated yet", "has_boundary": false },
+    "RSR12": { "scale_um_per_px": null, "notes": "not calibrated yet", "has_boundary": false },
+    "RSR13": { "scale_um_per_px": null, "notes": "not calibrated yet", "has_boundary": false }
+  }
+}

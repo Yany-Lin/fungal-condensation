@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+
+# Trash and experimental
+trash/
+
+# Python
+__pycache__/
+*.pyc
+
+# Heavy binary files (NPY masks, images) — hosted on OSF
+*.npy
+*.tif
+*.tiff
+*.jpg
+*.JPG
+*.png
+!**/output/*.png
+
+# Test output directory
+test/
+
+# Superseded output files (excluded from tracking)
+**/output/rsr2_mask_overlay.*
+**/output/rsr10_mask_overlay.*
+**/output/mask_overlay_rsrdiseased3_75pct.*
+**/output/panels_CDE.*
+**/output/panels_CDEFG.*
+**/output/tau50_zone_ex.*
+
+supplementary_videos_final/
+manuscript_update_tags.md
+literature_positioning_nature_comms.md
