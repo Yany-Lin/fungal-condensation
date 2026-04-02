@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "Fungal Hyphae Reorganize Condensation Fields as Distributed Hygroscopic Sinks"
+authors:
+  - family-names: "Lin"
+    given-names: "Yan Jun"
+    affiliation: "Cornell University"
+    orcid: "https://orcid.org/0009-0007-4761-5298"
+  - family-names: "Feng"
+    given-names: "Leyun"
+    affiliation: "Cornell University"
+  - family-names: "Khan"
+    given-names: "Awais"
+    affiliation: "Cornell University"
+  - family-names: "Park"
+    given-names: "Kyoo-Chul"
+    orcid: "https://orcid.org/0000-0003-2630-0688"
+  - family-names: "Jung"
+    given-names: "Sunghwan"
+    affiliation: "Cornell University"
+type: software
+license: MIT
+repository-code: "https://github.com/Yany-Lin/fungal-condensation"
+doi: "10.5281/zenodo.19167978"
+keywords:
+  - fungal hygroscopy
+  - condensation
+  - droplet evaporation
+  - wheat stripe rust
+  - Kaplan-Meier survival analysis
+  - leaf surface

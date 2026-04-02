@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Freehand Boundary Calibration Tool</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#111827;color:#e2e8f0;font-family:'Segoe UI',Arial,sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── Top bar ── */
+#topbar{
+  background:#1e2a3a;border-bottom:1px solid #2d3f54;
+  padding:8px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;flex-wrap:wrap;
+}
+#topbar h1{font-size:15px;font-weight:700;color:#60a5fa;letter-spacing:.02em;white-space:nowrap}
+.sep{width:1px;height:20px;background:#2d3f54;flex-shrink:0}
+
+/* Step pills */
+.steps{display:flex;gap:6px}
+.step{
+  padding:4px 12px;border-radius:99px;font-size:11px;font-weight:600;
+  border:1px solid #2d3f54;background:#0f172a;color:#64748b;cursor:pointer;transition:all .2s;
+}
+.step.active{background:#1d4ed8;border-color:#3b82f6;color:#fff}
+.step.done{background:#065f46;border-color:#10b981;color:#6ee7b7}
+
+/* ── Main layout ── */
+#main{display:flex;flex:1;overflow:hidden}
+
+/* ── Sidebar ── */
+#sidebar{
+  width:260px;flex-shrink:0;background:#1a2332;border-right:1px solid #2d3f54;
+  display:flex;flex-direction:column;overflow-y:auto;
+}
+.panel{padding:14px 14px 10px;border-bottom:1px solid #2d3f54}
+.panel h2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:10px}
+
+label{display:block;font-size:12px;color:#94a3b8;margin-bottom:3px}
+input[type=file]{display:none}
+.btn{
+  display:block;width:100%;padding:7px;border-radius:6px;font-size:12px;font-weight:600;
+  border:none;cursor:pointer;transition:all .15s;text-align:center;
+}
+.btn-primary{background:#1d4ed8;color:#fff}
+.btn-primary:hover{background:#2563eb}
+.btn-primary:disabled{background:#1e3a5f;color:#475569;cursor:default}
+.btn-success{background:#065f46;color:#6ee7b7}
+.btn-success:hover{background:#047857}
+.btn-success:disabled{background:#1c3a2e;color:#475569;cursor:default}
+.btn-danger{background:#7f1d1d;color:#fca5a5}
+.btn-danger:hover{background:#991b1b}
+.btn-outline{background:transparent;color:#94a3b8;border:1px solid #2d3f54}
+.btn-outline:hover{border-color:#60a5fa;color:#60a5fa}
+
+input[type=text],input[type=number]{
+  width:100%;padding:5px 8px;border-radius:5px;font-size:12px;
+  background:#0f172a;border:1px solid #2d3f54;color:#e2e8f0;outline:none;
+}
+input:focus{border-color:#3b82f6}
+
+.row{display:flex;gap:6px;align-items:center}
+.row label{margin:0;white-space:nowrap}
+
+.hint{font-size:10.5px;color:#475569;margin-top:5px;line-height:1.5}
+
+/* Mode toggle */
+.mode-btns{display:flex;gap:4px;margin-bottom:8px}
+.mode-btn{
+  flex:1;padding:5px;border-radius:5px;font-size:11px;font-weight:600;
+  border:1px solid #2d3f54;background:#0f172a;color:#64748b;cursor:pointer;
+}
+.mode-btn.active{background:#1d4ed8;border-color:#3b82f6;color:#fff}
+
+/* Stats */
+.stat-row{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;border-bottom:1px solid #1e2a3a}
+.stat-row .k{color:#64748b}
+.stat-row .v{color:#60a5fa;font-family:monospace}
+
+/* ── Canvas area ── */
+#canvas-wrap{
+  flex:1;position:relative;overflow:hidden;background:#0a0f1a;
+  display:flex;align-items:center;justify-content:center;
+}
+canvas{display:block;cursor:crosshair}
+#canvas-wrap.pan-mode canvas{cursor:grab}
+#canvas-wrap.pan-mode.panning canvas{cursor:grabbing}
+
+/* Zoom controls */
+#zoom-controls{
+  position:absolute;bottom:12px;right:12px;display:flex;gap:4px;
+}
+.zoom-btn{
+  width:28px;height:28px;border-radius:6px;border:1px solid #2d3f54;
+  background:#1a2332cc;color:#94a3b8;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.zoom-btn:hover{background:#2d3f54;color:#e2e8f0}
+
+#coords{
+  position:absolute;bottom:12px;left:12px;font-size:10px;color:#475569;
+  font-family:monospace;background:#0a0f1acc;padding:3px 7px;border-radius:4px;
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div id="topbar">
+  <h1>Freehand Boundary Calibration</h1>
+  <div class="sep"></div>
+  <div class="steps">
+    <div class="step active" id="s1" onclick="gotoStep(1)">1 · Load image</div>
+    <div class="step" id="s2" onclick="gotoStep(2)">2 · Set scale</div>
+    <div class="step" id="s3" onclick="gotoStep(3)">3 · Trace boundary</div>
+    <div class="step" id="s4" onclick="gotoStep(4)">4 · Export</div>
+  </div>
+  <div class="sep"></div>
+  <span style="font-size:11px;color:#475569">Use circle-dragger tool for elliptical sources · use this tool for irregular/elongated boundaries</span>
+</div>
+
+<!-- Main -->
+<div id="main">
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+
+    <!-- Step 1: Load -->
+    <div class="panel" id="panel1">
+      <h2>1 · Image</h2>
+      <input type="file" id="imgFile" accept="image/*">
+      <button class="btn btn-primary" onclick="document.getElementById('imgFile').click()">Load reference image…</button>
+      <p class="hint">Load the reference frame (e.g. <em>15m00s.jpg</em>). The image is never uploaded — everything runs locally.</p>
+      <div id="imgInfo" style="margin-top:8px;font-size:11px;color:#475569"></div>
+    </div>
+
+    <!-- Step 2: Scale -->
+    <div class="panel" id="panel2">
+      <h2>2 · Scale calibration</h2>
+      <p class="hint" style="margin-bottom:8px">Click two points on the scale bar, then enter the known distance.</p>
+      <div class="row" style="margin-bottom:6px">
+        <label>Distance (mm)</label>
+        <input type="number" id="scaleDist" value="3" step="0.1" min="0.01" style="width:70px">
+      </div>
+      <button class="btn btn-outline" id="btnPickScale" onclick="startScalePick()" style="margin-bottom:6px">Click 2 points on scale bar</button>
+      <div id="scaleStatus" style="font-size:11px;color:#475569;min-height:30px"></div>
+      <div id="scaleStats" style="margin-top:6px"></div>
+    </div>
+
+    <!-- Step 3: Trace -->
+    <div class="panel" id="panel3">
+      <h2>3 · Trace boundary</h2>
+      <div class="mode-btns">
+        <button class="mode-btn active" id="mFreehand" onclick="setMode('freehand')">Freehand</button>
+        <button class="mode-btn" id="mClick" onclick="setMode('click')">Click-to-place</button>
+      </div>
+      <p class="hint" id="modeHint" style="margin-bottom:8px">
+        <b>Freehand:</b> hold mouse and drag to trace. Release to close automatically.
+      </p>
+      <button class="btn btn-primary" id="btnStartTrace" onclick="startTrace()" style="margin-bottom:4px" disabled>Start tracing</button>
+      <button class="btn btn-danger" onclick="clearTrace()" style="margin-bottom:4px">Clear trace</button>
+      <button class="btn btn-outline" onclick="smoothPolygon()" style="margin-bottom:4px">Smooth polygon (−pts)</button>
+      <div id="traceStats" style="margin-top:8px"></div>
+    </div>
+
+    <!-- Step 4: Export -->
+    <div class="panel" id="panel4">
+      <h2>4 · Export</h2>
+      <div style="margin-bottom:8px">
+        <label>Trial / filename prefix</label>
+        <input type="text" id="trialName" placeholder="e.g. Green.6" style="margin-bottom:6px">
+      </div>
+      <button class="btn btn-success" id="btnExport" onclick="exportJSON()" disabled>Download calibration.json</button>
+      <p class="hint" style="margin-top:6px">Outputs the same <code>calibration.json</code> schema used by the Python pipeline (polygon_x / polygon_y + fitted ellipse).</p>
+      <div id="exportPreview" style="margin-top:10px;font-size:10px;color:#475569;font-family:monospace;word-break:break-all;max-height:140px;overflow-y:auto"></div>
+    </div>
+
+  </div><!-- /sidebar -->
+
+  <!-- Canvas -->
+  <div id="canvas-wrap" id="canvasWrap">
+    <canvas id="c"></canvas>
+    <div id="zoom-controls">
+      <button class="zoom-btn" onclick="zoom(1.25)">+</button>
+      <button class="zoom-btn" onclick="zoom(0.8)">−</button>
+      <button class="zoom-btn" onclick="resetView()" title="Reset view">⊙</button>
+    </div>
+    <div id="coords">x: — y: —</div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  State
+// ═══════════════════════════════════════════════════════════
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+
+let img = null;                // loaded HTMLImageElement
+let imgFileName = '';
+
+// View transform: canvas coords = img coords * scale + offset
+let viewScale = 1;
+let viewOX = 0, viewOY = 0;
+
+// Scale calibration
+let scalePts = [];            // up to 2 [imgX, imgY]
+let pixelSizeUm = null;       // µm per pixel (computed)
+let scaleMM = 3;
+
+// Polygon trace
+let polygon = [];              // array of [imgX, imgY]
+let tracing = false;
+let drawMode = 'freehand';    // 'freehand' | 'click'
+let clickDone = false;
+
+// Pan
+let panning = false;
+let panStart = {x:0, y:0};
+let panOrigin = {x:0, y:0};
+
+// Step state
+let scaleOK = false;
+let traceOK = false;
+let currentStep = 1;
+
+// ═══════════════════════════════════════════════════════════
+//  Canvas sizing
+// ═══════════════════════════════════════════════════════════
+function resizeCanvas() {
+  const wrap = document.getElementById('canvas-wrap');
+  c.width  = wrap.clientWidth;
+  c.height = wrap.clientHeight;
+  redraw();
+}
+window.addEventListener('resize', resizeCanvas);
+
+// ═══════════════════════════════════════════════════════════
+//  Image load
+// ═══════════════════════════════════════════════════════════
+document.getElementById('imgFile').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  imgFileName = file.name;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const i = new Image();
+    i.onload = () => {
+      img = i;
+      resetView();
+      document.getElementById('imgInfo').textContent =
+        `${file.name}  (${i.width} × ${i.height} px)`;
+      markStep(1, true);
+      gotoStep(2);
+    };
+    i.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+// ═══════════════════════════════════════════════════════════
+//  View helpers
+// ═══════════════════════════════════════════════════════════
+function resetView() {
+  if (!img) return;
+  const mx = c.width / img.width;
+  const my = c.height / img.height;
+  viewScale = Math.min(mx, my) * 0.95;
+  viewOX = (c.width  - img.width  * viewScale) / 2;
+  viewOY = (c.height - img.height * viewScale) / 2;
+  redraw();
+}
+
+function zoom(factor) {
+  const cx = c.width / 2, cy = c.height / 2;
+  viewOX = cx - (cx - viewOX) * factor;
+  viewOY = cy - (cy - viewOY) * factor;
+  viewScale *= factor;
+  redraw();
+}
+
+// Image coords → canvas coords
+function i2c(ix, iy) {
+  return [ix * viewScale + viewOX, iy * viewScale + viewOY];
+}
+// Canvas coords → image coords
+function c2i(cx, cy) {
+  return [(cx - viewOX) / viewScale, (cy - viewOY) / viewScale];
+}
+
+// ═══════════════════════════════════════════════════════════
+//  Redraw
+// ═══════════════════════════════════════════════════════════
+function redraw() {
+  ctx.clearRect(0, 0, c.width, c.height);
+  if (!img) {
+    ctx.fillStyle = '#0a0f1a';
+    ctx.fillRect(0,0,c.width,c.height);
+    ctx.fillStyle = '#2d3f54';
+    ctx.font = '14px Segoe UI';
+    ctx.textAlign = 'center';
+    ctx.fillText('Load a reference image to begin', c.width/2, c.height/2);
+    return;
+  }
+  // Image
+  const [x0,y0] = i2c(0,0);
+  ctx.drawImage(img, x0, y0, img.width*viewScale, img.height*viewScale);
+
+  // Scale points
+  for (let i = 0; i < scalePts.length; i++) {
+    const [cx,cy] = i2c(...scalePts[i]);
+    ctx.beginPath();
+    ctx.arc(cx,cy,5,0,Math.PI*2);
+    ctx.fillStyle = '#facc15';
+    ctx.fill();
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  if (scalePts.length === 2) {
+    const [ax,ay] = i2c(...scalePts[0]);
+    const [bx,by] = i2c(...scalePts[1]);
+    ctx.beginPath();
+    ctx.moveTo(ax,ay);
+    ctx.lineTo(bx,by);
+    ctx.strokeStyle = '#facc15';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4,3]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Polygon
+  if (polygon.length > 1) {
+    ctx.beginPath();
+    const [px0,py0] = i2c(...polygon[0]);
+    ctx.moveTo(px0, py0);
+    for (let i = 1; i < polygon.length; i++) {
+      const [px,py] = i2c(...polygon[i]);
+      ctx.lineTo(px,py);
+    }
+    if (!tracing || drawMode === 'click') ctx.closePath();
+    ctx.strokeStyle = '#22d3ee';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    // Fill if closed
+    if (!tracing || drawMode === 'click') {
+      ctx.fillStyle = 'rgba(34,211,238,0.12)';
+      ctx.fill();
+    }
+  }
+
+  // Polygon vertices (click mode)
+  if (drawMode === 'click' && polygon.length > 0) {
+    for (const pt of polygon) {
+      const [px,py] = i2c(...pt);
+      ctx.beginPath();
+      ctx.arc(px,py,3,0,Math.PI*2);
+      ctx.fillStyle = '#22d3ee';
+      ctx.fill();
+    }
+  }
+
+  // Fitted ellipse overlay
+  if (traceOK && polygon.length > 4) {
+    drawFittedEllipse();
+  }
+}
+
+function drawFittedEllipse() {
+  const e = fitEllipse(polygon);
+  if (!e) return;
+  const [ecx,ecy] = i2c(e.cx, e.cy);
+  const ra = (e.a * viewScale);
+  const rb = (e.b * viewScale);
+  ctx.save();
+  ctx.translate(ecx, ecy);
+  ctx.rotate(e.angle);
+  ctx.beginPath();
+  ctx.ellipse(0, 0, ra, rb, 0, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(251,191,36,0.6)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3,3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  Mouse events
+// ═══════════════════════════════════════════════════════════
+c.addEventListener('mousedown', e => {
+  const rect = c.getBoundingClientRect();
+  const cx = e.clientX - rect.left;
+  const cy = e.clientY - rect.top;
+  const [ix, iy] = c2i(cx, cy);
+
+  // Scale picking
+  if (scalePts.length < 2 && document.getElementById('btnPickScale').dataset.active === '1') {
+    scalePts.push([ix, iy]);
+    if (scalePts.length === 2) finishScalePick();
+    redraw();
+    return;
+  }
+
+  // Freehand tracing
+  if (tracing && drawMode === 'freehand') {
+    polygon = [[ix, iy]];
+    c.addEventListener('mousemove', freehandMove);
+    return;
+  }
+
+  // Click-to-place
+  if (tracing && drawMode === 'click') {
+    if (e.detail === 2) { // double-click: close
+      if (polygon.length > 2) {
+        clickDone = true;
+        tracing = false;
+        finishTrace();
+      }
+      return;
+    }
+    polygon.push([ix, iy]);
+    redraw();
+    return;
+  }
+
+  // Pan (middle button or alt+left)
+  if (e.button === 1 || e.altKey) {
+    panning = true;
+    panStart = {x: e.clientX, y: e.clientY};
+    panOrigin = {x: viewOX, y: viewOY};
+    document.getElementById('canvas-wrap').classList.add('panning');
+  }
+});
+
+function freehandMove(e) {
+  if (!tracing) return;
+  const rect = c.getBoundingClientRect();
+  const cx = e.clientX - rect.left;
+  const cy = e.clientY - rect.top;
+  const [ix, iy] = c2i(cx, cy);
+  // Subsample: only add if distance > 2px in image space
+  const last = polygon[polygon.length - 1];
+  const dx = ix - last[0], dy = iy - last[1];
+  if (dx*dx + dy*dy > 4) {
+    polygon.push([ix, iy]);
+    redraw();
+  }
+}
+
+c.addEventListener('mouseup', e => {
+  if (tracing && drawMode === 'freehand') {
+    c.removeEventListener('mousemove', freehandMove);
+    if (polygon.length > 5) {
+      tracing = false;
+      finishTrace();
+    }
+  }
+  if (panning) {
+    panning = false;
+    document.getElementById('canvas-wrap').classList.remove('panning');
+  }
+});
+
+window.addEventListener('mousemove', e => {
+  if (panning) {
+    viewOX = panOrigin.x + (e.clientX - panStart.x);
+    viewOY = panOrigin.y + (e.clientY - panStart.y);
+    redraw();
+  }
+  // Update coords display
+  if (img) {
+    const rect = c.getBoundingClientRect();
+    const [ix, iy] = c2i(e.clientX - rect.left, e.clientY - rect.top);
+    const inBounds = ix >= 0 && iy >= 0 && ix < img.width && iy < img.height;
+    document.getElementById('coords').textContent =
+      inBounds ? `x: ${Math.round(ix)}  y: ${Math.round(iy)}` : 'x: —  y: —';
+  }
+});
+
+// Zoom with scroll wheel
+c.addEventListener('wheel', e => {
+  e.preventDefault();
+  const factor = e.deltaY < 0 ? 1.1 : 0.91;
+  const rect = c.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  viewOX = mx - (mx - viewOX) * factor;
+  viewOY = my - (my - viewOY) * factor;
+  viewScale *= factor;
+  redraw();
+}, {passive: false});
+
+// ═══════════════════════════════════════════════════════════
+//  Scale calibration
+// ═══════════════════════════════════════════════════════════
+function startScalePick() {
+  if (!img) { alert('Load an image first.'); return; }
+  scalePts = [];
+  pixelSizeUm = null;
+  scaleOK = false;
+  updateExportBtn();
+  document.getElementById('btnPickScale').dataset.active = '1';
+  document.getElementById('btnPickScale').textContent = 'Click point 1 on scale bar…';
+  document.getElementById('scaleStatus').textContent = 'Click the first endpoint of the scale bar.';
+  redraw();
+}
+
+function finishScalePick() {
+  document.getElementById('btnPickScale').dataset.active = '0';
+  document.getElementById('btnPickScale').textContent = 'Click 2 points on scale bar';
+  const dx = scalePts[1][0] - scalePts[0][0];
+  const dy = scalePts[1][1] - scalePts[0][1];
+  const distPx = Math.sqrt(dx*dx + dy*dy);
+  scaleMM = parseFloat(document.getElementById('scaleDist').value) || 3;
+  pixelSizeUm = (scaleMM * 1000) / distPx;
+  document.getElementById('scaleStatus').innerHTML =
+    `✓ ${distPx.toFixed(1)} px = ${scaleMM} mm &nbsp;→&nbsp; <b>${pixelSizeUm.toFixed(4)} µm/px</b>`;
+  document.getElementById('scaleStats').innerHTML =
+    `<div class="stat-row"><span class="k">Scale dist (px)</span><span class="v">${distPx.toFixed(2)}</span></div>` +
+    `<div class="stat-row"><span class="k">Pixel size (µm)</span><span class="v">${pixelSizeUm.toFixed(4)}</span></div>`;
+  scaleOK = true;
+  markStep(2, true);
+  document.getElementById('btnStartTrace').disabled = false;
+  gotoStep(3);
+  updateExportBtn();
+  redraw();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  Tracing
+// ═══════════════════════════════════════════════════════════
+function setMode(mode) {
+  drawMode = mode;
+  document.getElementById('mFreehand').classList.toggle('active', mode === 'freehand');
+  document.getElementById('mClick').classList.toggle('active', mode === 'click');
+  document.getElementById('modeHint').innerHTML = mode === 'freehand'
+    ? '<b>Freehand:</b> hold and drag to trace the boundary. Release to finish.'
+    : '<b>Click-to-place:</b> click individual points. <b>Double-click</b> to close the polygon.';
+}
+
+function startTrace() {
+  if (!scaleOK) { alert('Set scale first (Step 2).'); return; }
+  polygon = [];
+  tracing = true;
+  clickDone = false;
+  traceOK = false;
+  updateExportBtn();
+  updateTraceStats();
+  redraw();
+}
+
+function clearTrace() {
+  polygon = [];
+  tracing = false;
+  traceOK = false;
+  updateTraceStats();
+  updateExportBtn();
+  markStep(3, false);
+  redraw();
+}
+
+function finishTrace() {
+  if (polygon.length < 3) return;
+  traceOK = true;
+  updateTraceStats();
+  markStep(3, true);
+  gotoStep(4);
+  updateExportBtn();
+  redraw();
+}
+
+function updateTraceStats() {
+  if (polygon.length < 3) {
+    document.getElementById('traceStats').innerHTML = '';
+    return;
+  }
+  const area = polygonArea(polygon);
+  const cx = polygon.reduce((s,p) => s+p[0], 0) / polygon.length;
+  const cy = polygon.reduce((s,p) => s+p[1], 0) / polygon.length;
+  document.getElementById('traceStats').innerHTML =
+    `<div class="stat-row"><span class="k">Points</span><span class="v">${polygon.length}</span></div>` +
+    `<div class="stat-row"><span class="k">Area (px²)</span><span class="v">${Math.round(area).toLocaleString()}</span></div>` +
+    `<div class="stat-row"><span class="k">Centroid</span><span class="v">[${cx.toFixed(0)}, ${cy.toFixed(0)}]</span></div>`;
+}
+
+// ─── Smooth: remove every other point ────────────────────
+function smoothPolygon() {
+  if (polygon.length < 8) return;
+  polygon = polygon.filter((_, i) => i % 2 === 0);
+  updateTraceStats();
+  redraw();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  Geometry helpers
+// ═══════════════════════════════════════════════════════════
+function polygonArea(pts) {
+  let area = 0;
+  const n = pts.length;
+  for (let i = 0; i < n; i++) {
+    const [x1,y1] = pts[i];
+    const [x2,y2] = pts[(i+1) % n];
+    area += x1 * y2 - x2 * y1;
+  }
+  return Math.abs(area) / 2;
+}
+
+function polygonCentroid(pts) {
+  const cx = pts.reduce((s,p) => s+p[0], 0) / pts.length;
+  const cy = pts.reduce((s,p) => s+p[1], 0) / pts.length;
+  return [cx, cy];
+}
+
+function polygonBBox(pts) {
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const xmin = Math.min(...xs), xmax = Math.max(...xs);
+  const ymin = Math.min(...ys), ymax = Math.max(...ys);
+  return [xmin, ymin, xmax - xmin, ymax - ymin];
+}
+
+// ─── Second-moment (covariance) ellipse fit ───────────────
+// Returns {cx, cy, a, b, angle} in image pixel coordinates.
+function fitEllipse(pts) {
+  if (pts.length < 5) return null;
+  const n = pts.length;
+  let mx = 0, my = 0;
+  for (const [x,y] of pts) { mx += x; my += y; }
+  mx /= n; my /= n;
+  let Ixx = 0, Iyy = 0, Ixy = 0;
+  for (const [x,y] of pts) {
+    const dx = x - mx, dy = y - my;
+    Ixx += dx*dx; Iyy += dy*dy; Ixy += dx*dy;
+  }
+  Ixx /= n; Iyy /= n; Ixy /= n;
+  // Eigenvalues of [[Ixx,Ixy],[Ixy,Iyy]]
+  const trace = Ixx + Iyy;
+  const det   = Ixx*Iyy - Ixy*Ixy;
+  const disc  = Math.sqrt(Math.max(0, trace*trace/4 - det));
+  const lam1  = trace/2 + disc;
+  const lam2  = trace/2 - disc;
+  // Semi-axes: 2*sqrt(eigenvalue) gives the 2-sigma boundary
+  const a = 2 * Math.sqrt(Math.max(0, lam1));
+  const b = 2 * Math.sqrt(Math.max(0, lam2));
+  const angle = Math.atan2(2*Ixy, Ixx - Iyy) / 2;
+  return {cx: mx, cy: my, a, b, angle};
+}
+
+// ═══════════════════════════════════════════════════════════
+//  Export
+// ═══════════════════════════════════════════════════════════
+function updateExportBtn() {
+  document.getElementById('btnExport').disabled = !(scaleOK && traceOK && polygon.length > 2);
+}
+
+function exportJSON() {
+  if (!scaleOK || !traceOK || polygon.length < 3) return;
+
+  const trialName = document.getElementById('trialName').value.trim() || 'trial';
+  const n = polygon.length;
+
+  // Centroid, area, bbox
+  const [cx, cy] = polygonCentroid(polygon);
+  const area     = polygonArea(polygon);
+  const bbox     = polygonBBox(polygon);
+
+  // Fit ellipse
+  const ell = fitEllipse(polygon);
+
+  // Scale line: pick the two points furthest apart for the points_px field
+  const scalePtsOut = scalePts.map(p => [p[0], p[1]]);
+
+  const out = {
+    scale: {
+      points_px:    scalePtsOut,
+      distance_mm:  scaleMM,
+      pixel_size_um: pixelSizeUm,
+    },
+    source_boundary: {
+      polygon_x:   polygon.map(p => p[0]),
+      polygon_y:   polygon.map(p => p[1]),
+      centroid_px: [cx, cy],
+      area_px2:    Math.round(area),
+      bounding_box: bbox.map(v => Math.round(v)),
+    },
+    source_ellipse: ell ? {
+      center_px:  [ell.cx, ell.cy],
+      width_px:   ell.a * 2,
+      height_px:  ell.b * 2,
+      angle_deg:  ell.angle * (180 / Math.PI),
+    } : null,
+    image: {
+      reference_file: imgFileName,
+      width_px:  img ? img.width  : null,
+      height_px: img ? img.height : null,
+    },
+    metadata: {
+      created_by: 'freehand_boundary_calibration.html',
+      method: 'freehand_polygon',
+    }
+  };
+
+  const json = JSON.stringify(out);
+
+  // Preview
+  document.getElementById('exportPreview').textContent =
+    JSON.stringify(out, null, 2).slice(0, 800) + '\n…';
+
+  // Download
+  const blob = new Blob([json], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${trialName}_calibration.json`;
+  a.click();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  Step navigation
+// ═══════════════════════════════════════════════════════════
+function gotoStep(n) {
+  currentStep = n;
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('s' + i);
+    if (!el.classList.contains('done')) {
+      el.classList.toggle('active', i === n);
+    }
+  }
+}
+
+function markStep(n, done) {
+  const el = document.getElementById('s' + n);
+  el.classList.toggle('done', done);
+  el.classList.remove('active');
+}
+
+// ═══════════════════════════════════════════════════════════
+//  Init
+// ═══════════════════════════════════════════════════════════
+resizeCanvas();
+</script>
+</body>
+</html>
