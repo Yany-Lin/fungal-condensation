@@ -1,0 +1,33 @@
+{
+  "scale": {
+    "points_px": [
+      [
+        792.5,
+        649.7083282470703
+      ],
+      [
+        3452.5,
+        644.7083282470703
+      ]
+    ],
+    "distance_mm": 3,
+    "pixel_size_um": 1.1278175564323871
+  },
+  "source_ellipse": {
+    "center_px": [
+      4000,
+      1388
+    ],
+    "width_px": 1932,
+    "height_px": 2260,
+    "angle_deg": 0
+  },
+  "image": {
+    "reference_file": "15m00s.jpg",
+    "width_px": 3936,
+    "height_px": 2624
+  },
+  "metadata": {
+    "created_by": "calibrate_hydrogel.html"
+  }
+}

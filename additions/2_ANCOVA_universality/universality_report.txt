@@ -1,0 +1,70 @@
+
+============================================================
+  Metric: $\mathrm{d}\tau_{50}/\mathrm{d}r$  (dtau50_dr)
+============================================================
+
+A. AIC / BIC model comparison
+    Model       k     R2      AIC      BIC  Akaike_w   dAIC    dBIC
+Universal  2.0000 0.6955 -72.1365 -69.0258    0.2135 1.9761  0.0000
+ Two-line  4.0000 0.7433 -74.1126 -67.8912    0.5734 0.0000  1.1346
+ Parallel  3.0000 0.6960 -70.1975 -65.5314    0.0810 3.9151  3.4944
+ Six-line 14.0000 0.8423 -71.1785 -49.4037    0.1322 2.9340 19.6221
+  >>> Preferred by AIC: Two-line
+  >>> Preferred by BIC: Universal
+
+B. Permutation test (slope difference hydrogel - fungi)
+   Observed slope diff = 0.002448
+   Permutation p-value = 0.0002  (10 000 permutations)
+
+C. Mixed-effects model (random intercept + slope by group)
+   Fixed intercept = 0.105931
+   Fixed slope     = 0.001959
+   RE SD(intercept) = 0.271621
+   RE SD(slope)     = 2.73e-04
+   LR statistic    = -14.9597
+   LRT p-value     = 1.0000
+
+E. Leave-one-group-out cross-validation
+held_out   system  n_test       R2    MAE
+   0.5:1 Hydrogel       5  -2.4923 0.2983
+     1:1 Hydrogel       5  -1.0807 0.2143
+     2:1 Hydrogel       5  -0.2590 0.2829
+    Agar Hydrogel       5 -35.3094 0.3910
+   Black    Fungi       5  -0.0309 0.3036
+   Green    Fungi       5 -49.8397 0.3667
+   White    Fungi       5  -1.0155 0.3156
+
+============================================================
+  Metric: Zone metric  (zone_metric)
+============================================================
+
+A. AIC / BIC model comparison
+    Model       k     R2       AIC       BIC  Akaike_w   dAIC   dBIC
+Universal  2.0000 0.9053 -127.8173 -124.7066    0.0103 9.0617 0.0000
+ Two-line  4.0000 0.9202 -129.8387 -123.6173    0.0282 7.0403 1.0892
+ Parallel  3.0000 0.9092 -127.2994 -122.6334    0.0079 9.5796 2.0732
+ Six-line 14.0000 0.9632 -136.8790 -115.1041    0.9536 0.0000 9.6025
+  >>> Preferred by AIC: Six-line
+  >>> Preferred by BIC: Universal
+
+B. Permutation test (slope difference hydrogel - fungi)
+   Observed slope diff = 0.000958
+   Permutation p-value = 0.0001  (10 000 permutations)
+
+C. Mixed-effects model (random intercept + slope by group)
+   Fixed intercept = 0.131794
+   Fixed slope     = 0.001840
+   RE SD(intercept) = 0.120090
+   RE SD(slope)     = 7.40e-05
+   LR statistic    = -17.5545
+   LRT p-value     = 1.0000
+
+E. Leave-one-group-out cross-validation
+held_out   system  n_test      R2    MAE
+   0.5:1 Hydrogel       5 -0.3960 0.1237
+     1:1 Hydrogel       5  0.2326 0.1474
+     2:1 Hydrogel       5  0.3960 0.1213
+    Agar Hydrogel       5 -2.3638 0.1264
+   Black    Fungi       5 -1.0296 0.0675
+   Green    Fungi       5 -0.8546 0.1790
+   White    Fungi       5 -2.1858 0.1737
