@@ -1,0 +1,352 @@
+% ============================================================
+%  LATEX PATCH v2 — "Fungal Hyphae Reorganize Condensation Fields
+%                     as Distributed Hygroscopic Sinks"
+%  Generated: 2026-04-19
+%
+%  Updates for new figure structure:
+%    Figure 3: panels A--E only (universal collapse)
+%    Figure 4: NEW morphological analysis figure (panels A--F)
+%
+%  Numbers from: Final Results (FFT, local density CV, lacunarity)
+% ============================================================
+
+
+% ============================================================
+% BLOCK 1 — FIGURE 3 CAPTION (panels A--E only)
+%
+% Figure 3 now shows universal collapse of fungi + hydrogels.
+% All morphology panels (old G--J) removed; now in Figure 4.
+% ============================================================
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figure3.pdf}
+\caption{\textbf{Universal condensation response across hydrogels and fungi.}
+\textbf{(A)}~Representative brightfield images of three fungal species
+on the cooled substrate: \textit{Aspergillus} (left),
+\textit{Mucor} (center), and \textit{Rhizopus} (right).
+Scale bar: 2~mm.
+\textbf{(B)}~Normalized radial size profiles $R^* = R/R_\infty$
+versus distance from the source boundary for all seven conditions
+(4~hydrogel concentrations + 3~fungal species; 5~replicates each,
+$n = 35$~trials). Shaded bands: mean~$\pm$~SEM.
+\textbf{(C)}~Heatmap of $R^*$ for all 35~trials, sorted by
+condition. Red bar: dry-zone width~$\delta$.
+\textbf{(D)}~Half-attenuation distance $d^*$ versus~$\delta$
+for all conditions ($R^2 = 0.90$).
+Fungal species follow the same linear relationship established
+by the hydrogel calibration series.
+\textbf{(E)}~Normalized size gradient
+$(R_\mathrm{far} - R_\mathrm{near})/R_\mathrm{mid}$
+versus~$\delta$ ($R^2 = 0.92$).}
+\label{fig:collapse}
+\end{figure}
+
+
+% ============================================================
+% BLOCK 2 — FIGURE 4 CAPTION (NEW morphological analysis figure)
+%
+% Panels:
+%   A: Aspergillus representative images (3 rows: colony surface,
+%      light microscopy, Hessian tubeness overlay)
+%   B: Mucor representative images (same 3 rows)
+%   C: FFT spectral slope boxplot (colony surface, n=14+7)
+%   D: FFT spectral slope boxplot (3D macro ROI, n=13+10)
+%   E: Local density CV boxplot (light microscopy, n=6+3)
+%   F: Lacunarity boxplot (3D macro, n=13+11)
+% ============================================================
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figure4.pdf}
+\caption{\textbf{Multi-scale structural morphology distinguishes
+\textit{Aspergillus} from \textit{Mucor}.}
+\textbf{(A,\,B)}~Representative images of \textit{Aspergillus}~(A)
+and \textit{Mucor}~(B) at three imaging scales.
+Top row: colony surface micrographs showing natural packing
+(scale bars: 1~mm).
+Middle row: light micrographs of disaggregated tissue showing
+unit morphology---dense conidial aggregates
+(\textit{Aspergillus}) versus a distributed filamentous network
+(\textit{Mucor}; scale bars: 1~mm).
+Bottom row: multi-scale Hessian tubeness response (inferno
+colormap), highlighting filamentary structures detected by
+second-derivative eigenvalue analysis.
+\textbf{(C)}~Spectral slope~$\alpha$ from tile-based 2D~FFT
+of colony-surface micrographs.
+\textit{Aspergillus} ($\alpha = -2.96 \pm 0.02$, $n = 14$)
+exhibits a shallower slope than \textit{Mucor}
+($\alpha = -3.09 \pm 0.10$, $n = 7$;
+$p = 0.013$, Cohen's $d = 2.21$), indicating greater
+fine-scale surface complexity.
+\textbf{(D)}~Spectral slope~$\alpha$ from 2D~FFT of
+manually selected in-focus regions on 3D colony-surface
+photographs, replicating the spectral separation on an
+independent image set
+(\textit{Aspergillus}: $-3.22 \pm 0.09$, $n = 13$;
+\textit{Mucor}: $-3.46 \pm 0.24$, $n = 10$;
+$p = 0.012$, $d = 1.41$).
+\textbf{(E)}~Local density coefficient of variation (CV) from
+light microscopy of disaggregated tissue.
+Foreground fraction was measured in 256~$\times$~256~\textmu m
+patches; the CV across patches quantifies spatial
+heterogeneity of tissue distribution.
+\textit{Aspergillus} ($0.69 \pm 0.11$) is significantly more
+heterogeneous than \textit{Mucor} ($0.39 \pm 0.03$;
+$p = 7.0 \times 10^{-4}$, $d = 3.12$;
+Benjamini--Hochberg adjusted $p = 0.012$).
+The ratio is preserved at $10\times$, $20\times$, and
+$40\times$ magnification ($1.7\times$--$1.9\times$),
+confirming that heterogeneity reflects intrinsic morphology.
+\textbf{(F)}~Lacunarity at the largest measurement scale,
+computed by the gliding-box algorithm on Otsu-segmented 3D
+colony-surface ROIs.
+\textit{Mucor} ($2.04 \pm 0.54$, $n = 11$) has significantly
+higher lacunarity than \textit{Aspergillus}
+($1.31 \pm 0.16$, $n = 13$;
+$p = 0.001$, $d = -1.92$), indicating a more
+heterogeneous gap distribution at the macro scale.}
+\label{fig:morphology}
+\end{figure}
+
+
+% ============================================================
+% BLOCK 3 — RESULTS: Structural morphology paragraph
+%
+% Insert after the sentence ending "...separates from
+%   \textit{Mucor} ($140 \pm 33$~\textmu m) and \textit{Rhizopus}
+%   ($110 \pm 23$~\textmu m)."
+%
+% Replaces everything through "(INSERT SEM SECTION)".
+% All references now point to Fig 4 (not Fig 3 G--J).
+% ============================================================
+
+This correspondence suggests that colony-scale architecture, rather
+than cell-wall chemistry alone, modulates how far the depletion zone
+extends.  To test this hypothesis we quantified the structural
+morphology of \textit{Aspergillus} and \textit{Mucor} colonies at
+three imaging scales using four independent metrics
+(Fig.~\ref{fig:morphology}).
+
+Automated two-dimensional Fourier analysis of colony-surface
+micrographs revealed that \textit{Aspergillus} surfaces have a
+shallower spectral slope ($\alpha = -2.96 \pm 0.02$, $n = 14$~images)
+than \textit{Mucor} ($\alpha = -3.09 \pm 0.10$, $n = 7$; Welch's
+$t = 3.4$, $p = 0.013$; Cohen's $d = 2.21$;
+Fig.~\ref{fig:morphology}C), indicating greater power at high spatial
+frequencies and therefore more fine-scale surface texture.  This
+separation was replicated on an independent set of 3D colony-surface
+photographs with manually selected in-focus regions
+($\alpha_{\mathrm{Asp}} = -3.22 \pm 0.09$, $n = 13$;
+$\alpha_{\mathrm{Muc}} = -3.46 \pm 0.24$, $n = 10$; $p = 0.012$,
+$d = 1.41$; Fig.~\ref{fig:morphology}D).
+
+Light microscopy of disaggregated colony tissue confirmed that
+the two genera differ in unit morphology
+(Fig.~\ref{fig:morphology}A,\,B).  \textit{Aspergillus} tissue
+consists of dense conidial aggregates separated by voids, whereas
+\textit{Mucor} tissue forms a distributed filamentous network.
+The coefficient of variation of local patch density---a
+preparation-independent metric of spatial heterogeneity---was
+$0.69 \pm 0.11$ for \textit{Aspergillus} versus
+$0.39 \pm 0.03$ for \textit{Mucor}
+($p = 7.0 \times 10^{-4}$, $d = 3.12$;
+Benjamini--Hochberg adjusted $p = 0.012$;
+Fig.~\ref{fig:morphology}E), with the ratio preserved across
+$10\times$, $20\times$, and $40\times$ magnification
+($1.7\times$--$1.9\times$).
+
+Finally, lacunarity analysis of Otsu-segmented 3D colony-surface
+ROIs showed that \textit{Mucor} has a significantly more
+heterogeneous gap distribution at the macro scale
+($\Lambda = 2.04 \pm 0.54$, $n = 11$) than \textit{Aspergillus}
+($\Lambda = 1.31 \pm 0.16$, $n = 13$; $p = 0.001$,
+$d = -1.92$; Fig.~\ref{fig:morphology}F).  The combination of
+high micro-scale heterogeneity (elevated CV) with low macro-scale
+lacunarity is the signature of hierarchical porosity:
+\textit{Aspergillus} is internally structured at fine scales but
+fills the projected area uniformly, whereas \textit{Mucor}'s
+tissue is locally uniform but irregularly distributed.
+
+
+% ============================================================
+% BLOCK 4 — METHODS: Spectral analysis
+% (replaces old spectral analysis paragraph)
+% ============================================================
+
+\paragraph{Spectral analysis of colony surface morphology.}
+Colony-surface micrographs were acquired using a DSLR macro
+imaging system at matched magnification (${\sim}1$~\textmu m/px,
+calibrated from a stage micrometer with 200~\textmu m divisions).
+Two datasets were analyzed: (i)~14~\textit{Aspergillus} and
+7~\textit{Mucor} colony-surface images (``colony surface''), and
+(ii)~13~\textit{Aspergillus} and 10~\textit{Mucor} manually
+selected in-focus regions from 3D colony photographs
+(``3D macro''; pixel calibration 0.94~\textmu m/px from a
+200~\textmu m-division grid).
+
+Grayscale images were divided into overlapping tiles
+($512 \times 512$~px, stride 256~px for colony surface;
+$256 \times 256$~px, stride 128~px for 3D macro ROIs).
+Tile-level quality control rejected tiles below the 10th
+percentile of within-image Laplacian variance (out-of-focus) and
+tiles with intensity standard deviation below 5~grey levels
+(textureless); typical retention was 75--90\%.  For each retained
+tile, a 2D Hann window was applied, the discrete 2D Fourier
+transform was computed, and the magnitude-squared power spectrum
+was azimuthally averaged into radial frequency bins.  A mean
+radial power profile was assembled per image by averaging across
+retained tiles.  The log--log spectral slope~$\alpha$ was
+obtained by ordinary least-squares regression of
+$\log_{10}(\mathrm{power})$ versus
+$\log_{10}(\mathrm{frequency})$ over 0.01--0.45~cyc/px.
+Because $\alpha$ is the exponent of a power-law fit in frequency
+space, it is independent of absolute pixel calibration.
+Statistical comparison used Welch's $t$-test.
+
+
+% ============================================================
+% BLOCK 5 — METHODS: Light microscopy (local density CV)
+% ============================================================
+
+\paragraph{Light microscopy of colony structure.}
+Colony tissue was excised from mature cultures, disaggregated on
+glass slides, and imaged under brightfield illumination at
+$10\times$, $20\times$, and $40\times$ magnification.  Pixel size
+was calibrated from a stage micrometer with 10~\textmu m divisions
+(0.75~\textmu m\,px$^{-1}$ at $10\times$;
+0.38~\textmu m\,px$^{-1}$ at $20\times$;
+0.19~\textmu m\,px$^{-1}$ at $40\times$).  Grayscale images were
+segmented by Otsu thresholding of the inverted intensity, followed
+by morphological opening and closing.  Spatial heterogeneity was
+quantified as the coefficient of variation of foreground-area
+fraction measured across a regular grid of non-overlapping
+$256 \times 256$~\textmu m patches.  Six~\textit{Aspergillus}
+(two per magnification) and three~\textit{Mucor} (one per
+magnification) fields were analyzed.  Benjamini--Hochberg
+correction was applied to control the false-discovery rate across
+all tested metrics.
+
+
+% ============================================================
+% BLOCK 6 — METHODS: Surface fragmentation and lacunarity
+% ============================================================
+
+\paragraph{Surface fragmentation analysis.}
+Three-dimensional colony-surface photographs were cropped to
+manually selected in-focus regions of interest
+(13~\textit{Aspergillus}, 11~\textit{Mucor} ROIs; pixel
+calibration 0.94~\textmu m/px).  Each ROI was binarized by Otsu
+thresholding (dark~=~tissue) and cleaned by morphological opening
+($3 \times 3$~kernel, 2~iterations) and closing
+($5 \times 5$~kernel, 2~iterations).  Lacunarity was computed
+using the gliding-box algorithm: for each box size~$r$
+(4, 8, 16, 32, 64, 128, 256~px), the variance-to-mean ratio
+of the foreground mass within sliding windows was recorded;
+the reported value is the lacunarity at the largest box size
+that fit within the ROI.  Statistical comparison used Welch's
+$t$-test and Mann--Whitney $U$~test.
+
+
+% ============================================================
+% BLOCK 7 — DISCUSSION: Hierarchical porosity and Kelvin argument
+%
+% Insert after the existing discussion of δ differences.
+% This replaces the old one-sentence spectral interpretation.
+% ============================================================
+
+\paragraph{Reproductive morphology as a determinant of sink strength.}
+The stronger depletion-zone response of \textit{Aspergillus}
+relative to \textit{Mucor} (Fig.~\ref{fig:collapse},
+Fig.~\ref{fig:morphology}) is not explained by differences in
+cellular water activity, which are negligible between viable
+hyphae of the two genera.  Instead, the genus-level variation in
+$\delta$ maps onto a difference in the characteristic porosity of
+each colony's aerial architecture.
+
+\textit{Aspergillus} builds capitate conidiophores: 30--50~\textmu m
+globose vesicles bearing radially packed chains of 2--3~\textmu m
+conidia.  Adjacent heads abut to form a dense carpet whose porosity
+spans three decades of length scale---sub-micron gaps between conidia
+in a chain, few-micron gaps between adjacent chains, and
+tens-of-microns gaps between neighboring heads.
+\textit{Mucor} builds a sparse forest of long sporangiophores
+(9--35~\textmu m diameter) each carrying a single terminal
+sporangium 50--300~\textmu m in diameter; its porosity is
+effectively single-scale and operates at tens to hundreds of
+microns.
+
+This geometric difference has a thermodynamic consequence through
+the Kelvin equation.  For a concave water meniscus of radius $r_p$
+in a wetting pore at $T = 280$~K,
+$\mathrm{RH}_\mathrm{eq}(r_p) =
+  \exp\!\bigl(-\ell_K / r_p\bigr)$
+with Kelvin length
+$\ell_K = 2\gamma V_m / (RT) \approx 1.17$~nm.
+A 200~nm inter-conidial capillary depresses equilibrium relative
+humidity by ${\sim}0.6\%$ below bulk; a 10~\textmu m
+inter-hyphal gap by ${\sim}0.01\%$.  Because the depletion flux
+near saturation scales with $(1 - \mathrm{RH})$, this sub-percent
+difference is amplified into a measurable difference in sink
+strength.
+
+The multi-scale geometry analysis in Fig.~\ref{fig:morphology}
+substantiates this picture.  The shallower spectral
+slope~$\alpha$ of \textit{Aspergillus}
+(Fig.~\ref{fig:morphology}C,\,D) reflects greater power at high
+spatial frequencies and therefore greater effective surface area
+per unit projected footprint.  The elevated local density CV
+(Fig.~\ref{fig:morphology}E) is the statistical signature of the
+dense-tuft/void texture that produces sub-micron gaps.  The
+\emph{inversion} of the lacunarity comparison at the macro scale
+(Fig.~\ref{fig:morphology}F)---where \textit{Mucor} is more
+gap-dominated---is not contradictory but the expected signature of
+\textbf{hierarchical porosity}: \textit{Aspergillus}'s closely
+spaced heads fill the projected area uniformly (low lacunarity)
+while remaining internally heterogeneous (high CV).  This is the
+geometry required to present a large Kelvin-relevant internal
+surface area without sacrificing vapor access.
+
+We therefore interpret the fitted effective water activity
+$a_{w,\mathrm{eff}}$ of the fungal sinks as a composite quantity
+$a_{w,\mathrm{eff}} \sim a_{w,\mathrm{cell}} \cdot
+  f_\mathrm{Kelvin}(r_p) \cdot f_\mathrm{MT}(\text{geometry})$,
+in which the genus-level differences reside entirely in the two
+geometric factors.  The rougher, hierarchically porous
+\textit{Aspergillus} morphology simultaneously depresses
+$f_\mathrm{Kelvin}$ (sub-micron capillaries) and decreases
+effective mass-transfer resistance $f_\mathrm{MT}$ (higher
+specific surface area), consistent with its larger $\delta$.
+
+One caveat merits explicit statement.  The outermost layer of
+\textit{A.\ fumigatus} conidia carries a RodA hydrophobin rodlet
+array, with DHN-melanin in the underlying wall.  An entirely
+hydrophobic conidial surface would disfavor capillary condensation.
+However, the hyphal mat, conidiophore stipes, and vesicles are
+hydrophilic and constitute the majority of the internal
+interfacial area, and composite surfaces with hydrophobic
+asperities over hydrophilic porous networks are an established
+motif for enhanced dropwise condensation.  Disentangling the
+geometric and chemical contributions would require comparison with
+a hydrophobin-deficient mutant ($\Delta$\textit{rodA}) and is a
+natural target for follow-up work.
+
+
+% ============================================================
+% BLOCK 8 — STATISTICAL ANALYSIS: updated sample sizes
+% ============================================================
+
+% Replace the old FFT transect description with:
+Colony-surface texture was compared using automated tile-based 2D
+FFT spectral slope analysis on two independent datasets
+(colony surface: 14~\textit{Aspergillus}, 7~\textit{Mucor}; 3D
+macro: 13~\textit{Aspergillus}, 10~\textit{Mucor} ROIs).  Light
+microscopy metrics were tested across 6~\textit{Aspergillus} and
+3~\textit{Mucor} fields with Benjamini--Hochberg correction for
+multiple comparisons.  Surface fragmentation and lacunarity were
+computed on 13~\textit{Aspergillus} and 11~\textit{Mucor} 3D
+colony ROIs.  Welch's $t$-test was used throughout; Mann--Whitney
+$U$~tests are reported as non-parametric confirmation.  Effect
+sizes are reported as Cohen's $d$ with pooled standard deviation.
+\end{antml:parameter>
+</invoke>

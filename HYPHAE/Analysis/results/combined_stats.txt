@@ -1,0 +1,31 @@
+HYPHAE ANALYSIS — COMBINED REPORT
+============================================================
+
+2D FFT spectral slope:
+  Asp: -2.9595 +/- 0.0241 (n=14)
+  Muc: -3.0924 +/- 0.1012 (n=7)
+  Welch's t=3.425, p=0.0129
+  Mann-Whitney U=94, p=0.0002
+  Cohen's d=2.205
+  KS D=0.857, p=0.0008
+
+Hessian foreground fraction:
+  Asp: 0.1597 +/- 0.0473 (n=6)
+  Muc: 0.2760 +/- 0.0462 (n=3)
+  Welch's t=-3.535, p=0.0223
+  Mann-Whitney U=0, p=0.0238
+  Cohen's d=-2.476
+  KS D=1.000, p=0.0238
+
+Laplacian variance:
+  Asp: 12.8045 +/- 7.5125 (n=31)
+  Muc: 7.4541 +/- 2.2516 (n=17)
+  Welch's t=3.676, p=0.0007
+  Mann-Whitney U=326, p=0.1779
+  Cohen's d=0.862
+  KS D=0.484, p=0.0071
+
+
+Delta values:
+  Aspergillus: delta = 298.1 +/- 15.9 um (n=5)
+  Mucor: delta = 139.9 +/- 33.1 um (n=5)
