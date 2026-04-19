@@ -1,0 +1,480 @@
+{
+  "_calibration": {
+    "um_per_px": 0.9399890653244448,
+    "dist_px": 7446.895137640663
+  },
+  "20251214_221838.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      1701,
+      3183
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.2427,
+    "r2": 0.9481,
+    "lap_var": 9.68,
+    "tiles_pass": 248,
+    "tiles_total": 276
+  },
+  "20251214_221853.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      1737,
+      2427
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.1965,
+    "r2": 0.9478,
+    "lap_var": 9.73,
+    "tiles_pass": 183,
+    "tiles_total": 204
+  },
+  "20251214_221920.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      951,
+      4940
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.1662,
+    "r2": 0.9398,
+    "lap_var": 10.02,
+    "tiles_pass": 199,
+    "tiles_total": 222
+  },
+  "20251214_221942.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      842,
+      3191
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.3253,
+    "r2": 0.9585,
+    "lap_var": 11.54,
+    "tiles_pass": 103,
+    "tiles_total": 115
+  },
+  "20251214_222017.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      733,
+      6086
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.31,
+    "r2": 0.9438,
+    "lap_var": 11.0,
+    "tiles_pass": 165,
+    "tiles_total": 184
+  },
+  "20251214_222031.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      801,
+      2045
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.2908,
+    "r2": 0.9415,
+    "lap_var": 11.65,
+    "tiles_pass": 63,
+    "tiles_total": 70
+  },
+  "20251214_222052.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      1033,
+      2448
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.1812,
+    "r2": 0.9341,
+    "lap_var": 11.22,
+    "tiles_pass": 113,
+    "tiles_total": 126
+  },
+  "20251214_222121.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      822,
+      4000
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.1637,
+    "r2": 0.9382,
+    "lap_var": 9.94,
+    "tiles_pass": 135,
+    "tiles_total": 150
+  },
+  "20251214_222146.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      749,
+      4680
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.2988,
+    "r2": 0.9459,
+    "lap_var": 10.89,
+    "tiles_pass": 126,
+    "tiles_total": 140
+  },
+  "20251214_222205.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      638,
+      6578
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.2396,
+    "r2": 0.9407,
+    "lap_var": 10.91,
+    "tiles_pass": 135,
+    "tiles_total": 150
+  },
+  "20251214_222452.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      1668,
+      3322
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.2203,
+    "r2": 0.9503,
+    "lap_var": 9.59,
+    "tiles_pass": 259,
+    "tiles_total": 288
+  },
+  "20251214_222530.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      1302,
+      3318
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -2.9976,
+    "r2": 0.92,
+    "lap_var": 10.56,
+    "tiles_pass": 194,
+    "tiles_total": 216
+  },
+  "20251214_222552.JPG": {
+    "genus": "Aspergillus",
+    "roi_size_px": [
+      1521,
+      2220
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.2353,
+    "r2": 0.947,
+    "lap_var": 10.24,
+    "tiles_pass": 144,
+    "tiles_total": 160
+  },
+  "20251210_155519.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      330,
+      635,
+      3910,
+      6796
+    ],
+    "roi_size_px": [
+      305,
+      2886
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.5129,
+    "r2": 0.9845,
+    "lap_var": 28.23,
+    "tiles_pass": 19,
+    "tiles_total": 21
+  },
+  "20251210_155530.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      301,
+      781,
+      3255,
+      5707
+    ],
+    "roi_size_px": [
+      480,
+      2452
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.5051,
+    "r2": 0.9855,
+    "lap_var": 19.7,
+    "tiles_pass": 32,
+    "tiles_total": 36
+  },
+  "20251210_155614.JPG": {
+    "genus": "Mucor",
+    "status": "deleted"
+  },
+  "20251210_155700.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      2559,
+      3047,
+      1702,
+      4109
+    ],
+    "roi_size_px": [
+      488,
+      2407
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.4181,
+    "r2": 0.9849,
+    "lap_var": 18.55,
+    "tiles_pass": 26,
+    "tiles_total": 34
+  },
+  "20251210_155713.JPG": {
+    "genus": "Mucor",
+    "status": "deleted"
+  },
+  "20251210_155743.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      2103,
+      2624,
+      6308,
+      8146
+    ],
+    "roi_size_px": [
+      521,
+      1838
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.513,
+    "r2": 0.9862,
+    "lap_var": 2.36,
+    "tiles_pass": 35,
+    "tiles_total": 39
+  },
+  "20251210_155748.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      2262,
+      2738,
+      3853,
+      7341
+    ],
+    "roi_size_px": [
+      476,
+      3488
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.3701,
+    "r2": 0.986,
+    "lap_var": 16.26,
+    "tiles_pass": 37,
+    "tiles_total": 52
+  },
+  "20251210_155753.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      1790,
+      2107,
+      2381,
+      4210
+    ],
+    "roi_size_px": [
+      317,
+      1829
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.9758,
+    "r2": 0.9819,
+    "lap_var": 3.57,
+    "tiles_pass": 11,
+    "tiles_total": 13
+  },
+  "20251210_155801.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      1107,
+      1583,
+      4540,
+      6544
+    ],
+    "roi_size_px": [
+      476,
+      2004
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.1806,
+    "r2": 0.9857,
+    "lap_var": 13.59,
+    "tiles_pass": 21,
+    "tiles_total": 28
+  },
+  "20251210_155811.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      2844,
+      3275,
+      4239,
+      6044
+    ],
+    "roi_size_px": [
+      431,
+      1805
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.4072,
+    "r2": 0.9856,
+    "lap_var": 2.12,
+    "tiles_pass": 21,
+    "tiles_total": 26
+  },
+  "20251210_155819.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      1847,
+      2486,
+      4584,
+      6597
+    ],
+    "roi_size_px": [
+      639,
+      2013
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.6127,
+    "r2": 0.9819,
+    "lap_var": 31.32,
+    "tiles_pass": 35,
+    "tiles_total": 42
+  },
+  "20251210_155844.JPG": {
+    "genus": "Mucor",
+    "status": "deleted"
+  },
+  "20251210_155850.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      1164,
+      1656,
+      6166,
+      7406
+    ],
+    "roi_size_px": [
+      492,
+      1240
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": null,
+    "r2": null,
+    "lap_var": 1.43,
+    "tiles_pass": 0,
+    "tiles_total": 16
+  },
+  "20251210_155904.JPG": {
+    "genus": "Mucor",
+    "status": "deleted"
+  },
+  "20251210_155926.JPG": {
+    "genus": "Mucor",
+    "roi_px": [
+      2559,
+      3559,
+      2645,
+      4536
+    ],
+    "roi_size_px": [
+      1000,
+      1891
+    ],
+    "full_size_px": [
+      4608,
+      8192
+    ],
+    "alpha": -3.0994,
+    "r2": 0.9817,
+    "lap_var": 1.6,
+    "tiles_pass": 41,
+    "tiles_total": 78
+  },
+  "20251210_155938.JPG": {
+    "genus": "Mucor",
+    "status": "deleted"
+  },
+  "20251210_155950.JPG": {
+    "genus": "Mucor",
+    "status": "deleted"
+  }
+}

@@ -1,0 +1,80 @@
+SURFACE FRAGMENTATION ANALYSIS
+============================================================
+Calibration: 0.9400 µm/px
+
+N components:
+  Asp: 48.8462 ± 15.6570 (n=13)
+  Muc: 25.1818 ± 12.6239 (n=11)
+  Welch t=4.098, p=0.0005
+  Mann-Whitney U=126, p=0.0019
+  Cohen's d=1.648
+
+Tissue fraction:
+  Asp: 0.4929 ± 0.0449 (n=13)
+  Muc: 0.3701 ± 0.0814 (n=11)
+  Welch t=4.464, p=0.0005
+  Mann-Whitney U=129, p=0.0010
+  Cohen's d=1.916
+
+Gap fraction:
+  Asp: 0.5071 ± 0.0449 (n=13)
+  Muc: 0.6299 ± 0.0814 (n=11)
+  Welch t=-4.464, p=0.0005
+  Mann-Whitney U=14, p=0.0010
+  Cohen's d=-1.916
+
+Perimeter density (µm/1000µm²):
+  Asp: 17.2528 ± 1.3361 (n=13)
+  Muc: 18.4984 ± 4.7435 (n=11)
+  Welch t=-0.843, p=0.4166
+  Mann-Whitney U=46, p=0.1475
+  Cohen's d=-0.372
+
+Mean gap width (µm):
+  Asp: 59.3846 ± 9.1938 (n=13)
+  Muc: 110.2636 ± 77.1094 (n=11)
+  Welch t=-2.175, p=0.0541
+  Mann-Whitney U=16, p=0.0014
+  Cohen's d=-0.970
+
+Median gap width (µm):
+  Asp: 43.4000 ± 5.0595 (n=13)
+  Muc: 73.5182 ± 43.3723 (n=11)
+  Welch t=-2.290, p=0.0445
+  Mann-Whitney U=25, p=0.0076
+  Cohen's d=-1.022
+
+Mean component area (µm²):
+  Asp: 36471.8077 ± 14150.5606 (n=13)
+  Muc: 16565.6182 ± 8490.3979 (n=11)
+  Welch t=4.248, p=0.0004
+  Mann-Whitney U=131, p=0.0006
+  Cohen's d=1.671
+
+Largest component fraction:
+  Asp: 0.5020 ± 0.2007 (n=13)
+  Muc: 0.6167 ± 0.2306 (n=11)
+  Welch t=-1.289, p=0.2121
+  Mann-Whitney U=48, p=0.1827
+  Cohen's d=-0.534
+
+Mean lacunarity:
+  Asp: 1.7381 ± 0.1692 (n=13)
+  Muc: 2.4486 ± 0.5780 (n=11)
+  Welch t=-3.936, p=0.0022
+  Mann-Whitney U=8, p=0.0003
+  Cohen's d=-1.736
+
+Lacunarity (largest scale):
+  Asp: 1.3055 ± 0.1561 (n=13)
+  Muc: 2.0411 ± 0.5416 (n=11)
+  Welch t=-4.355, p=0.0011
+  Mann-Whitney U=2, p=0.0001
+  Cohen's d=-1.921
+
+Fractal dimension:
+  Asp: 1.8108 ± 0.0247 (n=13)
+  Muc: 1.7687 ± 0.0551 (n=11)
+  Welch t=2.343, p=0.0352
+  Mann-Whitney U=108, p=0.0370
+  Cohen's d=1.017

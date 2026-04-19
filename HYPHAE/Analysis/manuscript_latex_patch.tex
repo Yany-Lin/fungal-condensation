@@ -1,0 +1,176 @@
+% ============================================================
+%  LATEX PATCH for "Fungal Hyphae as Distributed Hygroscopic Vapor Sinks"
+%  Generated: 2026-04-18
+%
+%  This file contains drop-in replacement blocks keyed to line numbers
+%  in the current manuscript .tex source.  Each block is self-contained
+%  and can be copy-pasted into the manuscript.
+%
+%  Numbers below are from the automated tile-based 2D FFT pipeline
+%  (spectral_slope_2d.py) with focus-gate ROI filtering.
+% ============================================================
+
+
+% ============================================================
+% BLOCK A — RESULTS (replaces lines ~162–169 + INSERT SEM SECTION)
+%
+% Context: follows the sentence ending "...separates from
+%   \textit{Mucor} ($140 \pm 33$~\textmu m) and \textit{Rhizopus}
+%   ($110 \pm 23$~\textmu m)."
+%
+% Replaces everything from "This correspondence suggests..." through
+% "(INSERT SEM SECTION)" with three paragraphs.
+% ============================================================
+
+This correspondence suggests that colony-scale architecture modulates
+how far the depletion zone extends.  To quantify this architectural
+difference, we performed automated two-dimensional Fourier analysis of
+colony surface micrographs (Fig.~\ref{fig:fungi}G,H).  Each grayscale
+image was divided into overlapping $512 \times 512$-pixel tiles
+(stride 256~px); out-of-focus tiles (Laplacian variance below the
+10th within-image percentile) and textureless tiles (intensity
+standard deviation $< 5$ grey levels) were excluded.  For each
+retained tile, a 2D Hann window was applied, the two-dimensional power
+spectrum was computed, and azimuthally averaged into radial frequency
+bins.  The log--log spectral slope~$\alpha$ was obtained per image by
+fitting $\log_{10}(\mathrm{power})$ versus
+$\log_{10}(\mathrm{frequency})$ on the mean radial profile over
+0.01--0.45~cyc/px.  \textit{Aspergillus} colonies exhibited a
+shallower spectral rolloff ($\alpha = -2.96 \pm 0.03$, $n = 14$
+images) than \textit{Mucor} ($\alpha = -3.16 \pm 0.11$, $n = 7$
+images; Welch's $t = 4.6$, $p = 3.1 \times 10^{-3}$; Mann--Whitney
+$p = 1.7 \times 10^{-5}$; Cohen's $d = 2.96$; Kolmogorov--Smirnov
+$D = 1.0$; Fig.~\ref{fig:fungi}I), indicating greater fine-scale
+surface complexity consistent with densely packed conidial heads
+versus the smooth filaments of \textit{Mucor} aerial hyphae.  A
+sensitivity analysis confirmed that $\alpha$ was invariant to the
+stringency of the focus gate (Supplementary Table~X).
+
+Light microscopy of disaggregated colony tissue confirms that the two
+genera differ in unit morphology (Fig.~\ref{fig:fungi}G,H).
+\textit{Aspergillus} colonies break apart into dense conidial
+aggregates that fill much of the field of view as a single dominant
+cluster, whereas \textit{Mucor} tissue separates into a distributed
+filamentous network of many small, loosely connected fragments.
+Quantitative image analysis across three magnifications ($10\times$,
+$20\times$, $40\times$; six \textit{Aspergillus} and three
+\textit{Mucor} fields) shows that the spatial heterogeneity of
+fungal-material distribution, measured as the coefficient of variation
+of local patch density, is consistently higher for
+\textit{Aspergillus} than for \textit{Mucor} ($0.69 \pm 0.11$ vs.\
+$0.39 \pm 0.03$; Mann--Whitney $U = 18$, $p = 0.024$), with the
+ratio preserved at every magnification ($1.7\times$ at $10\times$,
+$1.7\times$ at $20\times$, $1.9\times$ at $40\times$).  Because these
+structural contrasts are preserved across a fourfold range in
+magnification, the measured patchiness reflects intrinsic morphology
+rather than preparation-dependent material retention.  The ball-like
+conidial aggregates of \textit{Aspergillus} introduce high
+spatial-frequency content in any imaging plane, producing the
+shallower spectral rolloff observed in colony-surface micrographs
+(Fig.~\ref{fig:fungi}I), while the smooth, uniformly distributed
+hyphae of \textit{Mucor} yield a steeper spectral decay.  This
+structural basis explains why colony-scale architecture, rather than
+cell-wall chemistry, is the primary determinant of depletion-zone
+width.
+
+
+% ============================================================
+% BLOCK B — METHODS: replace "Spectral analysis of colony surface
+% morphology" (lines ~333–342)
+% ============================================================
+
+\paragraph{Spectral analysis of colony surface morphology.}
+Colony surface micrographs were acquired using the same DSLR macro
+imaging system at matched magnification (calibrated at ${\sim}1$~\textmu
+m/px using a stage micrometer with 200~\textmu m divisions).
+Grayscale images of \textit{Aspergillus} (14~images) and
+\textit{Mucor} (7~images) colonies were analyzed using an automated
+tile-based 2D FFT pipeline.  Each image was divided into overlapping
+$512 \times 512$-pixel tiles (stride 256~px).  Tile-level quality
+control proceeded by two gates: (i)~tiles below the 10th percentile
+of per-image Laplacian variance were rejected as out-of-focus; and
+(ii)~tiles with intensity standard deviation below 5~grey levels were
+rejected as textureless.  Typical retention was 75--90\% of tiles per
+image.  For each retained tile, a 2D Hann window was applied, the
+discrete 2D Fourier transform was computed, and the magnitude-squared
+power spectrum was azimuthally averaged into radial frequency bins.  A
+mean radial power profile was assembled per image by averaging across
+all retained tiles (typically 360--470 per image).  The log--log
+spectral slope~$\alpha$ was obtained by ordinary least-squares
+regression of $\log_{10}(\mathrm{power})$ versus
+$\log_{10}(\mathrm{frequency})$ over the range 0.01--0.45~cyc/px.
+Because $\alpha$ is the exponent of a power-law fit in frequency
+space, it is independent of absolute pixel calibration.  A sensitivity
+analysis varying the focus-gate cutoff from the 0th to the 30th
+percentile confirmed that $\alpha$ estimates were invariant to gate
+stringency (Supplementary Table~X).  Statistical comparison used
+Welch's $t$-test (unequal variances confirmed by Levene's test,
+$p < 0.01$).  Both slope distributions passed the Shapiro--Wilk
+normality test.
+
+
+% ============================================================
+% BLOCK C — METHODS: new subsection (insert after Block B)
+% ============================================================
+
+\paragraph{Light microscopy of colony structure.}
+Colony tissue was excised from mature cultures, disaggregated on glass
+microscope slides, and imaged under brightfield illumination at
+$10\times$, $20\times$, and $40\times$ magnification.  Pixel size was
+calibrated from a stage micrometer with 10~\textmu m divisions
+(0.75~\textmu m\,px$^{-1}$ at $10\times$;
+0.38~\textmu m\,px$^{-1}$ at $20\times$;
+0.19~\textmu m\,px$^{-1}$ at $40\times$).  Grayscale images were
+segmented by Otsu thresholding of the inverted intensity, followed by
+morphological opening and closing to remove speckle noise.  Three
+structural metrics were extracted from each field: (i)~cluster
+dominance, defined as the area of the largest connected component
+divided by the total foreground area; (ii)~median pore diameter,
+computed from the Euclidean distance transform of the binary mask; and
+(iii)~local density coefficient of variation, computed as the standard
+deviation divided by the mean of foreground-area fractions measured
+across a regular grid of $8 \times 8$ non-overlapping patches.  Six
+\textit{Aspergillus} (two per magnification) and three \textit{Mucor}
+(one per magnification) fields were analyzed.
+
+
+% ============================================================
+% BLOCK D — DISCUSSION: update spectral numbers
+% (replaces the sentence at ~line 236 starting "Spectral analysis
+% supports this interpretation:")
+% ============================================================
+
+Spectral analysis supports this interpretation:
+\textit{Aspergillus} exhibits significantly greater fine-scale surface
+roughness ($\alpha = -2.96$ vs.\ $-3.16$; $p = 3.1 \times 10^{-3}$;
+Cohen's $d = 2.96$), consistent with densely packed conidial heads
+presenting more absorbing surface per unit footprint and sustaining
+greater total vapor flux \cite{sun2017}.
+
+
+% ============================================================
+% BLOCK E — STATISTICAL ANALYSIS: update FFT description
+% (replaces "110 FFT transects (70 Aspergillus, 40 Mucor)" at ~line 365)
+% ============================================================
+
+% OLD: 110 FFT transects (70 \textit{Aspergillus}, 40 \textit{Mucor}).
+% NEW:
+14 \textit{Aspergillus} and 7 \textit{Mucor} colony-surface images
+(automated tile-based 2D FFT; typically 360--470 tiles per image after
+quality-control gating).
+
+
+% ============================================================
+% BLOCK F — FIGURE 3 CAPTION: update panels G–J
+% (replaces lines starting "\textbf{(G,\,H)}" through "\textbf{(J)}")
+% ============================================================
+
+\textbf{(G,\,H)}~Light micrographs of disaggregated colony tissue at
+$40\times$ magnification.  \textit{Aspergillus}~(G) shows dense
+conidial aggregates; \textit{Mucor}~(H) shows a distributed
+filamentous network.  Scale bars: 50~\textmu m.
+\textbf{(I)}~Spectral slopes~$\alpha$ from automated tile-based 2D
+FFT analysis of colony surface micrographs (14
+\textit{Aspergillus}, 7 \textit{Mucor} images).
+\textbf{(J)}~$\alpha$ versus $\bar{\delta}$ (group means~$\pm$~1~SD).
+\end{filecontents}

@@ -1,0 +1,67 @@
+CONSOLIDATED MORPHOLOGICAL ANALYSIS
+Nature Communications — Fungal Hyphae as Hygroscopic Vapor Sinks
+======================================================================
+
+
+── SCALE 1: Colony surface (Spacing 2/Green + W2) ──
+  FFT spectral slope (α):
+    Asp: -2.9595 ± 0.0241 (n=14)
+    Muc: -3.0924 ± 0.1012 (n=7)
+    Welch t=3.425, p=0.0129
+    Mann-Whitney U=94, p=0.0002
+    Cohen's d=2.205 [1.08, 3.33]
+
+
+── SCALE 2: 3D macro colony (ROI-selected) ──
+  FFT spectral slope (α):
+    Asp: -3.2206 ± 0.0862 (n=13)
+    Muc: -3.4595 ± 0.2398 (n=10)
+    Welch t=3.004, p=0.0122
+    Cohen's d=1.405 [0.49, 2.32]
+
+  Surface fragmentation:
+    N components: Asp 48.85±15.66 vs Muc 25.18±12.62, d=1.65, p=0.0005
+    Tissue fraction: Asp 0.49±0.04 vs Muc 0.37±0.08, d=1.92, p=0.0005
+    Mean gap width: Asp 59.38±9.19 vs Muc 110.26±77.11, d=-0.97, p=0.0541
+    Mean component area: Asp 36471.81±14150.56 vs Muc 16565.62±8490.40, d=1.67, p=0.0004
+    Mean lacunarity: Asp 1.74±0.17 vs Muc 2.45±0.58, d=-1.74, p=0.0022
+    Lacunarity (max scale): Asp 1.31±0.16 vs Muc 2.04±0.54, d=-1.92, p=0.0011
+    Fractal dimension: Asp 1.81±0.02 vs Muc 1.77±0.06, d=1.02, p=0.0352
+
+
+── SCALE 3: Light Microscopy (disaggregated tissue) ──
+  Hessian tubeness foreground fraction:
+    Asp: 0.1597 ± 0.0473 (n=6)
+    Muc: 0.2760 ± 0.0462 (n=3)
+    Welch t=-3.535, p=0.0223
+    Cohen's d=-2.476 [-4.27, -0.68]
+
+  Prep-independent metrics (BH-corrected p<0.05):
+    network_fiber_area_fraction: d=7.72, p_raw=0.0052, p_BH=0.0467
+    local_density_p90_minus_p10: d=6.20, p_raw=0.0000, p_BH=0.0013
+    local_density_std: d=4.61, p_raw=0.0001, p_BH=0.0022
+    local_density_cv: d=3.12, p_raw=0.0007, p_BH=0.0117
+    foreground_darkness_contrast: d=2.49, p_raw=0.0040, p_BH=0.0467
+
+
+── CONVERGENT EVIDENCE ──
+Metric                              Scale                   d        p
+----------------------------------------------------------------------
+  network fiber area fraction (LM)  Light Microscopy     7.72   0.0052
+  local density p90 minus p10 (LM)  Light Microscopy     6.20  2.6e-05
+  local density std (LM)            Light Microscopy     4.61  8.8e-05
+  local density cv (LM)             Light Microscopy     3.12  7.0e-04
+  foreground darkness contrast (LM) Light Microscopy     2.49   0.0040
+  Hessian fg fraction               Light Microscopy    -2.48   0.0223
+  FFT α (colony)                    Colony surface       2.20   0.0129
+  Lacunarity (max scale) (3D)       3D macro            -1.92   0.0011
+  Tissue fraction (3D)              3D macro             1.92  4.6e-04
+  Mean lacunarity (3D)              3D macro            -1.74   0.0022
+  Mean component area (3D)          3D macro             1.67  3.9e-04
+  N components (3D)                 3D macro             1.65  4.8e-04
+  FFT α (3D macro)                  3D macro             1.41   0.0122
+  Fractal dimension (3D)            3D macro             1.02   0.0352
+  Mean gap width (3D)               3D macro            -0.97   0.0541
+
+Total significant metrics: 15
+Across 3 imaging scales
