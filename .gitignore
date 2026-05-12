@@ -1,14 +1,16 @@
 # macOS
 .DS_Store
+._*
 
 # Trash and experimental
 trash/
+test/
 
 # Python
 __pycache__/
 *.pyc
 
-# Heavy binary files (NPY masks, images) — hosted on OSF
+# Heavy binary files (NPY masks, images) — hosted on Zenodo
 *.npy
 *.tif
 *.tiff
@@ -17,8 +19,23 @@ __pycache__/
 *.png
 !**/output/*.png
 
-# Test output directory
-test/
+# Audit + sync working files (not for publication)
+audit_logs/
+audit_pvalues.md
+sync_manifest.md
+
+# Legacy / draft tracking notes
+manuscript_update_tags.md
+literature_positioning_nature_comms.md
+
+# Movies and raw morphology imagery — distributed via Zenodo, not Git
+Supplementary Movies/
+SuppMov REPO/
+HYPHAE/Light Microscopy/
+HYPHAE/3D/
+HYPHAE/EXTRA/
+Methods Figure /
+supplementary_videos_final/
 
 # Superseded output files (excluded from tracking)
 **/output/rsr2_mask_overlay.*
@@ -28,6 +45,5 @@ test/
 **/output/panels_CDEFG.*
 **/output/tau50_zone_ex.*
 
-supplementary_videos_final/
-manuscript_update_tags.md
-literature_positioning_nature_comms.md
+# Legacy supplementary scaffolding (superseded by Supp test/FigureSupplementary/)
+Experimental/

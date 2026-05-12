@@ -1,0 +1,10 @@
+file,genus,mag,n_units,median_diameter_um,mean_diameter_um,median_solidity,blob_fraction,tubeness_threshold
+Pink_10X_1.TIF,Aspergillus,10,305,13.82,25.04,1.0176,0.737,0.3188
+Pink_10X_2.TIF,Aspergillus,10,479,19.74,28.99,0.9191,0.6509,0.3201
+Pink_20X_1.TIF,Aspergillus,20,181,7.96,17.92,0.9586,0.763,0.3101
+Pink_20X_2.TIF,Aspergillus,20,456,9.43,14.68,0.9135,0.7378,0.3904
+Pink_40X_1.TIF,Aspergillus,40,139,3.1,8.58,1.0193,0.8502,0.3669
+Pink_40X_2.TIF,Aspergillus,40,385,3.5,6.7,0.9394,0.8806,0.3524
+White_10X_1.TIF,Mucor,10,597,15.1,23.33,0.9531,0.7178,0.4109
+White_20X_1.TIF,Mucor,20,652,6.72,9.97,0.9919,0.7421,0.4423
+White_40X_1.TIF,Mucor,40,552,4.02,6.37,0.9222,0.8263,0.4073

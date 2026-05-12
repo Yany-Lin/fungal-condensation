@@ -455,7 +455,7 @@ cook_df.to_csv(OUTDIR / "cook_distances.csv", index=False)
 print("Saving LaTeX")
 
 with open(OUTDIR / "comprehensive_stats_table.tex", "w") as f:
-    f.write("% Auto-generated statistical supplement\n")
+    f.write("% Statistical supplement computed by comprehensive_stats.py\n")
     f.write("% ════════════════════════════════════════════\n\n")
 
     f.write("\\begin{table}[htbp]\n\\centering\n")

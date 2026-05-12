@@ -1,0 +1,10 @@
+file,genus,mag,alpha,r2,tiles_pass,tiles_total
+Pink_10X_1.TIF,Aspergillus,10,-3.597,0.9792,176,196
+Pink_10X_2.TIF,Aspergillus,10,-3.6785,0.9832,176,196
+Pink_20X_1.TIF,Aspergillus,20,-2.994,0.965,176,196
+Pink_20X_2.TIF,Aspergillus,20,-2.8687,0.9703,176,196
+Pink_40X_1.TIF,Aspergillus,40,-2.2883,0.9355,176,196
+Pink_40X_2.TIF,Aspergillus,40,-2.3064,0.9585,176,196
+White_10X_1.TIF,Mucor,10,-3.5368,0.997,176,196
+White_20X_1.TIF,Mucor,20,-3.543,0.9898,176,196
+White_40X_1.TIF,Mucor,40,-2.0812,0.9232,176,196

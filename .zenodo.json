@@ -1,7 +1,7 @@
 {
-  "title": "Fungal Hyphae Reorganize Condensation Fields as Distributed Hygroscopic Sinks",
+  "title": "Fungal Hyphae as Distributed Vapor Sinks",
   "upload_type": "software",
-  "description": "Analysis code, processed data, and figure generation scripts for: Fungal Hyphae Reorganize Condensation Fields as Distributed Hygroscopic Sinks. Includes hydrogel calibration experiments (20 trials), fungal tracking pipelines (15 trials), wheat stripe rust (RSR) leaf condensation analysis (6 leaves), and Kaplan-Meier survival analysis of droplet lifetimes.",
+  "description": "Analysis code, processed data, and raw microscopy data for: Fungal Hyphae as Distributed Vapor Sinks (Lin, Feng, Khan, Park & Jung). Contents: 35 per-trial zip archives with raw microscopy images (JPG), Cellpose segmentation masks (NPY), and calibration metadata (JSON) for hydrogel calibration (20 trials: 5 agar, 5 NaCl 0.5:1, 5 NaCl 1:1, 5 NaCl 2:1) and fungal colony experiments (15 trials: 5 Aspergillus, 5 Mucor, 5 Rhizopus); colony morphology images for Figure 4 (3D Aspergillus + Mucor brightfield ROIs and light-microscopy images); field validation imagery on Gymnosporangium-infected Malus leaves (6 trials: 3 healthy, 3 diseased with secondary saprophytic colonization); chamber stability traces across 13 trials; the complete analysis code repository (fungal-condensation-code.zip) including figure-generation scripts; and the supplementary movies referenced in the manuscript. Processed CSVs sufficient to reproduce all figures are included in the code archive. Note: internal directory names in trial zips may differ from the zip filename due to lab naming conventions; the calibration.json in each zip matches the analysis pipeline.",
   "creators": [
     {
       "name": "Lin, Yan Jun",
@@ -18,6 +18,7 @@
     },
     {
       "name": "Park, Kyoo-Chul",
+      "affiliation": "Cornell University",
       "orcid": "0000-0003-2630-0688"
     },
     {
@@ -28,13 +29,16 @@
   "license": "MIT",
   "keywords": [
     "fungal hygroscopy",
+    "vapor sinks",
     "condensation",
     "droplet evaporation",
-    "wheat stripe rust",
+    "Gymnosporangium",
+    "Aspergillus",
+    "Mucor",
     "Kaplan-Meier survival analysis",
     "water activity",
     "leaf surface",
     "microscopy image analysis"
   ],
-  "notes": "Raw microscopy images and ilastik probability maps are archived on Zenodo (DOI: 10.5281/zenodo.19167978). Processed CSVs sufficient to reproduce all figures are included in this repository."
+  "notes": "Concept DOI 10.5281/zenodo.19391416 resolves to the latest version. The companion code repository is also mirrored at https://github.com/Yany-Lin/fungal-condensation. Raw microscopy images and Cellpose segmentation masks are provided as per-trial zip archives; processed CSVs sufficient to reproduce all figures are also included via the code archive."
 }

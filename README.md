@@ -1,4 +1,4 @@
-# Fungal Hyphae Reorganize Condensation Fields as Distributed Hygroscopic Sinks
+# Fungal Hyphae as Distributed Hygroscopic Vapor Sinks
 
 Code and analysis pipeline for reproducing all quantitative figures and tables in the manuscript.
 
@@ -184,7 +184,7 @@ Steps involving Cellpose segmentation (`step0_segment_droplets.py`) take ~2-5 mi
 
 Raw microscopy images (*.jpg, *.tif), ilastik probability maps (*.h5), and NPY segmentation masks are hosted on Zenodo. Processed CSV data (in `raw_data/aggregate_edt/` and `output/` folders) are included in this repository and sufficient to reproduce all figure panels without external data.
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19167978.svg)](https://doi.org/10.5281/zenodo.19167978)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19391416.svg)](https://doi.org/10.5281/zenodo.19391416)
 
 ## License
 
@@ -194,4 +194,4 @@ This project is licensed under the MIT License -- see [LICENSE](LICENSE) for det
 
 If you use this code, please cite:
 
-> Lin, Y.J., Feng, L., Khan, A., Park, K.-C. & Jung, S. Fungal Hyphae Reorganize Condensation Fields as Distributed Hygroscopic Sinks. *Nature Communications* (2025). https://doi.org/10.5281/zenodo.19167978
+> Lin, Y.J., Feng, L., Khan, A., Park, K.-C. & Jung, S. Fungal Hyphae as Distributed Hygroscopic Vapor Sinks. *Nature Communications* (2025). https://doi.org/10.5281/zenodo.19391416

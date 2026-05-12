@@ -1,0 +1,9 @@
+metric,type,asp_mean,muc_mean,ratio,cohen_d,p_value
+δ (µm),condensation,298.12,139.86,2.132,6.103,9.1e-05
+Size gradient,condensation,0.5249,0.4904,1.07,0.208,0.752345
+τ50 survival gradient,condensation,0.4364,0.3504,1.246,0.501,0.462151
+d* (mm),condensation,0.4121,0.3745,1.101,0.287,0.662795
+GLCM contrast (C),morphological,2.263,5.059,0.45,-1.86,0.002
+Tissue thickness (D),morphological,7.236,4.602,1.57,7.44,6.6e-11
+Local density CV (E),morphological,0.687,0.392,1.75,3.12,0.0007
+Erosion survival (F),morphological,0.756,0.336,2.25,4.28,0.0001
