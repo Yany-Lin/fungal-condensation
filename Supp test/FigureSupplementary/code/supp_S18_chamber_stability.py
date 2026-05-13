@@ -27,7 +27,7 @@ from supp_common import (
     apply_style, clean_axes, save_fig,
 )
 
-BASE_DIR  = Path(__file__).resolve().parent.parent.parent
+BASE_DIR  = Path(__file__).resolve().parent.parent.parent.parent
 CSV_PATH  = BASE_DIR / 'Methods Figure ' / 'ChamberModel' / 'NATURE_model_13trials.csv'
 OUT_DIR   = OUTPUT_DIR / 'S18'
 OUT_DIR.mkdir(parents=True, exist_ok=True)

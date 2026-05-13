@@ -10,7 +10,7 @@ import sys
 sys.path.insert(0, str(__import__('pathlib').Path(__file__).parent))
 from supp_common import OUTPUT_DIR, MM, LABEL_SIZE, PANEL_LBL, apply_style, save_fig
 
-SRC = Path(__file__).resolve().parents[2] / 'additions' / '3_bootstrap_CIs'
+SRC = Path(__file__).resolve().parents[3] / 'additions' / '3_bootstrap_CIs'
 OUT = OUTPUT_DIR / 'S9'
 
 PANELS = [

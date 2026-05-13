@@ -8,7 +8,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-BASE_DIR   = Path(__file__).resolve().parent.parent.parent
+BASE_DIR   = Path(__file__).resolve().parent.parent.parent.parent
 HG_AGG_DIR = BASE_DIR / 'FigureHGAggregate' / 'raw_data' / 'aggregate_edt'
 FG_AGG_DIR = BASE_DIR / 'FigureFungi'       / 'raw_data' / 'aggregate_edt'
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / 'output'
