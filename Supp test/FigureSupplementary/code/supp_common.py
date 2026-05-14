@@ -13,6 +13,19 @@ HG_AGG_DIR = BASE_DIR / 'FigureHGAggregate' / 'raw_data' / 'aggregate_edt'
 FG_AGG_DIR = BASE_DIR / 'FigureFungi'       / 'raw_data' / 'aggregate_edt'
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / 'output'
 
+# Data files and code internals use lab color codes (Green/black/white);
+# the manuscript and Zenodo deposit use genus names. display_label()
+# converts a trial-ID string to the genus-named form for on-figure labels.
+_DISPLAY_PREFIX = {'Green': 'Aspergillus', 'black': 'Rhizopus', 'white': 'Mucor'}
+
+
+def display_label(tid):
+    """Return tid with Green./black./white. prefix replaced by genus name."""
+    for src, dst in _DISPLAY_PREFIX.items():
+        if tid.startswith(src + '.'):
+            return tid.replace(src + '.', dst + '.', 1)
+    return tid
+
 DELTA = {
     'agar.1':   77.8, 'agar.2':   92.4, 'agar.3':  163.5,
     'agar.4':  100.1, 'agar.5':  101.6,

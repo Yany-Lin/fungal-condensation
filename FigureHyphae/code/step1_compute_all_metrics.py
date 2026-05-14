@@ -22,11 +22,14 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-ROI_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Analysis/results/3d_overlays')
+_T7 = Path('/Volumes/T7/FINAL OSF')
+_REPO = Path(__file__).resolve().parent.parent.parent
+BASE = _T7 if _T7.exists() else _REPO
+ROI_DIR = BASE / 'HYPHAE' / 'Analysis' / 'results' / '3d_overlays'
 SESSION = ROI_DIR / 'roi_session.json'
-MICRO_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Light Microscopy')
-RSR_CSV = Path('/Volumes/T7/FINAL OSF/FigureRSR/output/rsr_and_lab_dstar_metrics.csv')
-OUT = Path('/Users/yany/Downloads')
+MICRO_DIR = BASE / 'HYPHAE' / 'Light Microscopy'
+RSR_CSV = BASE / 'FigureRSR' / 'output' / 'rsr_and_lab_dstar_metrics.csv'
+OUT = BASE / 'FigureHyphae' / 'output'
 
 CAL_3D = 0.94
 MM = 1 / 25.4
@@ -188,13 +191,20 @@ t, p = stats.ttest_ind(d_asp, d_muc, equal_var=False)
 print(f'  Asp={d_asp.mean():.2f}±{d_asp.std(ddof=1):.2f} µm, Muc={d_muc.mean():.2f}±{d_muc.std(ddof=1):.2f} µm, p={p:.4g}')
 
 # ── Panel E: Local density CV (light micro, from fungi_metrics.csv) ──
-print('\n── Panel E: Local density CV ──')
+# Legacy metric, superseded by Hessian tubeness CV in the final manuscript.
+# Kept for archival reproducibility; skipped if the original Leyun-side CSV
+# is not present on the current machine.
+print('\n── Panel E: Local density CV (legacy, skipped if data absent) ──')
 import pandas as pd
-fungi = pd.read_csv('/Users/yany/Desktop/Leyun microscopy/analysis_outputs/fungi_metrics.csv')
-e_asp = fungi.loc[fungi['label'] == 'Green', 'local_density_cv'].values
-e_muc = fungi.loc[fungi['label'] == 'White', 'local_density_cv'].values
-t, p = stats.ttest_ind(e_asp, e_muc, equal_var=False)
-print(f'  Asp={e_asp.mean():.4f}±{e_asp.std(ddof=1):.4f}, Muc={e_muc.mean():.4f}±{e_muc.std(ddof=1):.4f}, p={p:.4g}')
+_legacy_csv = Path('/Users/yany/Desktop/Leyun microscopy/analysis_outputs/fungi_metrics.csv')
+if _legacy_csv.exists():
+    fungi = pd.read_csv(_legacy_csv)
+    e_asp = fungi.loc[fungi['label'] == 'Green', 'local_density_cv'].values
+    e_muc = fungi.loc[fungi['label'] == 'White', 'local_density_cv'].values
+    t, p = stats.ttest_ind(e_asp, e_muc, equal_var=False)
+    print(f'  Asp={e_asp.mean():.4f}±{e_asp.std(ddof=1):.4f}, Muc={e_muc.mean():.4f}±{e_muc.std(ddof=1):.4f}, p={p:.4g}')
+else:
+    print(f'  (skipped: legacy CSV at {_legacy_csv} not present; see step_final_rebuild_all.py for Hessian tubeness CV)')
 
 # ── Panel F: Erosion survival (light micro, exact segmentation) ──
 print('\n── Panel F: Erosion survival ──')

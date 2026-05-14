@@ -15,7 +15,7 @@
 
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 
-\captionsetup{font=small,labelfont=bf,labelsep=pipe,justification=justified}
+\captionsetup{font=small,labelfont=bf,labelsep=colon,justification=justified}
 
 \renewcommand{\figurename}{Supplementary Fig.}
 \renewcommand{\tablename}{Supplementary Table}
@@ -27,10 +27,19 @@
 
 \begin{center}
 {\Large \textbf{Supplementary Information}}\\[0.5em]
-{\large Fungal Hyphae as Distributed Hygroscopic Vapor Sinks}
+{\large Fungal Hyphae as Distributed Vapor Sinks}
 \end{center}
 
 \vspace{1cm}
+
+
+\section*{Supplementary Text 1: Internal equilibration and $a_{w,\mathrm{eq}}$ interpretation}
+
+The vapor penetration depth in chitin-rich walls is $\ell_{\mathrm{pen}} \sim \sqrt{D_{\mathrm{eff,wall}} \cdot t} \approx 300$~$\mu$m over the 15-min condensation window, using a literature effective wall diffusivity $D_{\mathrm{eff,wall}} \sim 10^{-10}$~m$^2$/s (Rosa et al.\ 2010; ref.\ 8 in the main paper), and exceeds either genus's structure thickness (4--7~$\mu$m) by more than an order of magnitude. The polymer phase therefore equilibrates internally within a second, so specific surface area is not rate-limiting. What matters instead is total absorbing mass per projected area: at the same external vapor flux, \textit{Aspergillus}'s larger reservoir takes longer to fill, its surface water activity rises more slowly, and its time-averaged driving force $(1 - a_{w,\mathrm{eff}})$ stays larger across the experimental window, matching the $\sim 2\times$ ratio in measured $\delta$. Direct gravimetric tracking at colony resolution would test this mechanism directly but is beyond the scope of the present work.
+
+The calibration returns effective water-activity values of $\sim 0.98$--0.99 for \textit{Mucor} and \textit{Rhizopus} (near the upper resolution limit of the calibration) and $\sim 0.93$ for \textit{Aspergillus}. The thermodynamically relevant driving force $(1 - a_{w,\mathrm{eff}})$ therefore differs by roughly $3.5\times$ between \textit{Aspergillus} and the other two genera (0.07 vs.\ 0.02). The dependence of $\delta$ on structure thickness implies non-equilibrium internal absorption during the 15-min window: the calibrated value is best interpreted as a time-integrated effective driving force rather than an instantaneous bulk water activity.
+
+\clearpage
 
 
 \begin{figure}[H]
@@ -45,7 +54,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{supplementary_figures/SuppFig2.pdf}
+\includegraphics[width=0.92\textwidth]{supplementary_figures/SuppFig2.pdf}
 \caption{\textbf{Normalized radial size profiles for all 35 laboratory trials.} Each panel shows one trial (7 conditions $\times$ 5 replicates). Gray scatter: individual droplet radii at $t = 14.5$--15.5 min versus distance from the source boundary. Colored band: mean $\pm$ SEM computed in 100 $\mu$m bins. Red dashed line: dry-zone width $\delta$. Trial identifier is shown in the top-right corner of each panel. Conditions (top to bottom): agar, 0.5:1 NaCl, 1:1 NaCl, 2:1 NaCl, \textit{Aspergillus}, \textit{Rhizopus}, \textit{Mucor}. The spatial size gradient---small near-field droplets transitioning to larger far-field droplets---is reproducible across all replicates and strengthens monotonically with increasing vapor-sink strength.}
 \label{fig:Rd_all}
 \end{figure}
@@ -106,8 +115,78 @@
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{supplementary_figures/SuppFig8.pdf}
-\caption{\textbf{Individual field trial size--distance scatter plots.} \textbf{(A)} Condensation micrographs of two \textit{Gymnosporangium yamadae}-infected \textit{Malus} leaf specimens with manual droplet annotations (red circles) and analysis regions (dashed rectangles). Top: healthy rust specimen. Bottom: diseased specimen with secondary fungal colonization. Scale bars: 3 mm. \textbf{(B)} Equivalent radius $r_{\mathrm{eq}}$ versus distance from the fungal boundary for each of the six field trials (3 healthy, left column; 3 diseased, right column). Gray dots: individual annotated droplets ($N = 1{,}507$ total). Red lines: ordinary least-squares regression. All six trials show a significant positive correlation between droplet size and distance (individual trial Pearson $r = 0.43$--0.66, all $p < 10^{-6}$; sign test for all-positive slopes: $p = 0.031$).}
+\caption{\textbf{Individual field trial size--distance scatter plots.} \textbf{(A)} Condensation micrographs of two \textit{Gymnosporangium yamadae}-infected \textit{Malus} leaf specimens with manual droplet annotations (red circles) and analysis regions (dashed rectangles). Top: healthy rust specimen. Bottom: diseased specimen with secondary fungal colonization. Scale bars: 3 mm. \textbf{(B)} Equivalent radius $r_{\mathrm{eq}}$ versus distance from the fungal boundary for each of the six field trials (3 healthy, left column; 3 diseased, right column). Gray dots: individual annotated droplets ($N = 1{,}507$ total). Red lines: per-trial ordinary least-squares regression used to compute the size--distance slope reported in the main text. All six slopes are positive (Pearson $r = 0.43$--$0.66$, all $p < 10^{-6}$; sign test for all-positive slopes: two-tailed $p = 0.031$).}
 \label{fig:rsr_extended}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{supplementary_figures/SuppFig9.pdf}
+\caption{\textbf{FFT spectral slope and cross-validation.} \textbf{(A)}~Spectral slope $\alpha$ from tile-based 2D radial PSDs of macro-scale brightfield colony surfaces; \textit{Aspergillus} ($-3.01 \pm 0.11$, $n = 13$) is shallower than \textit{Mucor} ($-3.51 \pm 0.38$, $n = 11$; Welch's $p = 0.001$), reflecting greater sub-resolution surface roughness. \textbf{(B,\,C)}~Cross-validation of $\alpha$ against an independent spatial-domain texture metric (GLCM contrast, B) and against absorbing capacity (C). Spearman is reported as the primary statistic given the small $n$ and non-normal residuals; Pearson is shown for completeness. Boxes: IQR; whiskers: 1.5$\times$IQR.}
+\label{fig:supp_fft}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{supplementary_figures/SuppFig10.pdf}
+\caption{\textbf{Hessian tubeness response on light microscopy.} Representative $10\times$ ROIs for \textit{Aspergillus} \textbf{(A)} and \textit{Mucor} \textbf{(B)}. Within each row, left to right: original grayscale image, multi-scale Hessian tubeness response ($\sigma = 1$--$16$~px, max-projected, inferno colormap), and the adaptive-threshold tissue mask overlaid in red on the original. Per-image tubeness CV is annotated in the lower-right corner. \textit{Aspergillus} exhibits broad solid cores and filamentous edges (high CV); \textit{Mucor} is more uniformly filamentous (low CV).}
+\label{fig:supp_hessian}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{supplementary_figures/SuppFig11.pdf}
+\caption{\textbf{Iterative erosion of light-microscopy tissue masks.} Representative \textit{Aspergillus} \textbf{(A)} and \textit{Mucor} \textbf{(B)} masks shown at iterations 0 (original), 3, 5, 10, and 20 (1-pixel-radius disk per iteration). Surviving tissue (red) and pixels removed at the current step (blue) are overlaid. Percent retention is annotated above each frame. \textit{Aspergillus} retains $\sim$80\% at iteration~10; \textit{Mucor} retains $\sim$40\%, indicating thinner, more easily eroded structures.}
+\label{fig:supp_erosion}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{supplementary_figures/SuppFig12.pdf}
+\caption{\textbf{Hessian tubeness CV: derivation and magnification stability.} \textbf{(A)}~Within-tissue distribution of Hessian tubeness response for one representative ROI per genus. \textit{Aspergillus} (green) is bimodal (low-tubeness cores and high-tubeness edges, CV $= 1.12$); \textit{Mucor} (gray) is more unimodal (CV $= 0.61$). \textbf{(B)}~Per-image tubeness CV; Welch's $p = 9.7 \times 10^{-4}$ ($n_a = 6$ \textit{Aspergillus} images, $n_m = 3$ \textit{Mucor} images; the larger \textit{Aspergillus} sample reflects the two replicates available at each magnification). \textbf{(C)}~Per-magnification tubeness CV. Bars are means; dots are individual ROIs (two per magnification for \textit{Aspergillus}, one for \textit{Mucor}). Numbers above the bars are the Asp/Muc ratio at each magnification ($1.71\times$, $1.76\times$, $1.65\times$ for $10\times$, $20\times$, $40\times$ respectively), demonstrating that the genus separation is preserved across imaging scales.}
+\label{fig:supp_tubcv}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{supplementary_figures/SuppFig13.pdf}
+\caption{\textbf{Absorbing capacity decomposition.} Per-ROI box plots ($n = 13$ \textit{Aspergillus}, $n = 11$ \textit{Mucor}). \textbf{(A)}~Tissue area fraction $f_{\mathrm{tissue}}$. \textbf{(B)}~Median structure thickness $d_{\mathrm{structure}}$. \textbf{(C)}~Absorbing capacity $\mathcal{A} = f_{\mathrm{tissue}} \times d_{\mathrm{structure}}$. \textbf{(D)}~Specific surface area (perimeter / tissue area). \textit{Mucor} exhibits $1.78\times$ higher SSA than \textit{Aspergillus} ($p = 7 \times 10^{-7}$); the inversion of this ordering relative to vapor-sink strength rules out surface-to-volume ratio as the operative quantity and supports the absorbing-capacity (mass-per-footprint) framework. Boxes: IQR; whiskers: 1.5$\times$IQR.}
+\label{fig:supp_capacity}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{supplementary_figures/SuppFig14.pdf}
+\caption{\textbf{Structure-thickness segmentation is robust to threshold choice.} \textbf{(A)}~Median tissue thickness for \textit{Aspergillus} (green) and \textit{Mucor} (gray) as the adaptive threshold multiplier $k$ is swept from 0.3 to 0.7~$\times\,\mathrm{std}$. Both genera fall within published hyphal-diameter ranges (shaded bands) across the entire sweep. \textbf{(B)}~Asp/Muc thickness ratio is stable at $1.67$--$1.73$; dashed line: reported $1.73\times$ at $k = 0.5$. Bands: $\pm$\,SEM.}
+\label{fig:supp_seg3d}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{supplementary_figures/SuppFig15.pdf}
+\caption{\textbf{Chamber temperature and humidity reproducibility across 13 trials.} \textbf{(A)}~Mean trajectories of substrate temperature (red) and chamber relative humidity (blue) with $\pm$\,1\,SD bands across $n = 13$ standardized trials; condensation phase $t = 0$--$15$~min, evaporation $t > 15$~min. \textbf{(B)}~Stability statistics: trial-to-trial mean SD and time-pooled SD (RMS-style) for both channels.}
+\label{fig:chamber}
 \end{figure}
 
 \clearpage
@@ -115,7 +194,7 @@
 
 \begin{table}[H]
 \centering
-\caption{\textbf{Sensitivity analysis of the normalized size gradient to zone boundary definitions.} The normalized size gradient $(\bar{R}_{\mathrm{far}} - \bar{R}_{\mathrm{near}})/\bar{R}_{\mathrm{mid}}$ was computed for 36 combinations of near, mid, and far evaluation zone boundaries and regressed against dry-zone width $\delta$ across all 35 laboratory trials (hydrogels + fungi). All combinations yield $R^2 \geq 0.83$ and Spearman $\rho \geq 0.81$, confirming that the metric is robust to the choice of zone boundaries. The canonical zone definitions used in the main text (near: 0--500 $\mu$m, mid: 900--1100 $\mu$m, far: 1900--2100 $\mu$m; bold) yield $R^2 = 0.905$.}
+\caption{\textbf{Sensitivity of the normalized size gradient to zone boundaries.} The size gradient $(\bar{R}_{\mathrm{far}} - \bar{R}_{\mathrm{near}})/\bar{R}_{\mathrm{mid}}$ was regressed against $\delta$ across all 35 laboratory trials for 36 combinations of near, mid, and far evaluation zones. All combinations give $R^2 \geq 0.83$ and Spearman $\rho \geq 0.81$. The canonical zones (bold; near 0--500, mid 900--1100, far 1900--2100~$\mu$m) yield $R^2 = 0.905$ ($p = 1.9 \times 10^{-18}$, $n = 35$); this is the same regression reported as $R^2 = 0.91$ (rounded) in the main text.}
 \label{tab:sensitivity}
 \vspace{0.5em}
 \small
@@ -162,6 +241,42 @@ Near ($\mu$m) & Mid ($\mu$m) & Far ($\mu$m) & $n$ & $R^2$ & $\rho$ \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+
+\clearpage
+\begin{table}[H]
+\caption{\textbf{Per-metric architecture statistics for \textit{Aspergillus} vs.\ \textit{Mucor}.}
+Welch's $t$-test as primary, with Mann--Whitney $U$ used as non-parametric confirmation (light-microscopy MWU bounded by $p \geq 0.024$ at $n_a = 6$, $n_m = 3$; not tabulated). All four metrics survive Bonferroni correction at $\alpha/4 = 0.0125$ against the effective dimensionality of three (volumetric hyphal load, surface roughness, intra-hyphal heterogeneity). $n = 13$ \textit{Aspergillus} and $n = 11$ \textit{Mucor} ROIs for FFT slope and structure thickness; $n = 6$ \textit{Aspergillus} and $n = 3$ \textit{Mucor} for tubeness CV and erosion survival.}
+\centering
+\begin{tabular}{lccccc}
+\toprule
+Metric & \textit{Aspergillus} & \textit{Mucor} & Ratio & Welch $p$ & Cohen $d$ \\
+\midrule
+FFT spectral slope $\alpha$  & $-3.01 \pm 0.11$    & $-3.51 \pm 0.38$    & 1.17 ($|\alpha|$) & $1.0 \times 10^{-3}$  & 1.85 \\
+Structure thickness ($\mu$m) & $7.21 \pm 0.26$     & $4.16 \pm 0.53$     & 1.73             & $7.1 \times 10^{-11}$ & 7.58 \\
+Hessian tubeness CV          & $1.04 \pm 0.17$     & $0.61 \pm 0.06$     & 1.70             & $9.7 \times 10^{-4}$  & 2.93 \\
+Erosion survival (iter.\ 10) & $0.791 \pm 0.103$   & $0.372 \pm 0.025$   & 2.13             & $7.9 \times 10^{-5}$  & 4.75 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\clearpage
+\section*{Supplementary Movie Legends}
+
+\noindent\textbf{Supplementary Movie 1. Time-lapse condensation around an agar control disk.} DSLR macro time-lapse of the condensation--evaporation cycle around a 3~mm agar-only disk ($a_w = 1.00$) on the cooled aluminum substrate. The non-hygroscopic control shows uniform droplet growth across the field with no near-source depletion zone, providing the no-sink baseline against which all hygroscopic samples are compared.
+
+\vspace{1em}
+\noindent\textbf{Supplementary Movie 2. Time-lapse condensation around a 2:1 NaCl--agar hydrogel.} DSLR macro time-lapse around a 3~mm 2:1 NaCl--agar hydrogel disk ($a_w = 0.75$), the strongest abiotic sink in the calibration series. A clear dry zone forms within the first minute, near-source droplet growth is suppressed throughout condensation, and near-source droplets disappear first when evaporation begins.
+
+\vspace{1em}
+\noindent\textbf{Supplementary Movie 3. Time-lapse condensation around an \textit{Aspergillus} colony.} DSLR macro time-lapse around a 3~mm \textit{Aspergillus} colony patch transferred onto the cooled substrate with aerial mycelium upward. The dense conidia-dominated surface produces the widest depletion zone of the three fungal genera, with near-source growth suppression and outward-propagating evaporation matching the laboratory hydrogel pattern.
+
+\vspace{1em}
+\noindent\textbf{Supplementary Movie 4. Time-lapse condensation around a \textit{Mucor} colony.} DSLR macro time-lapse around a 3~mm \textit{Mucor} colony patch under matched conditions. The hypha-dominated surface produces a narrower depletion zone than \textit{Aspergillus} despite higher chitin--chitosan content per unit mass, illustrating that absorbing capacity (mass per footprint), not surface-to-volume ratio, sets vapor-sink strength.
+
+\vspace{1em}
+\noindent\textbf{Supplementary Movie 5. Time-lapse condensation on a \textit{Gymnosporangium}-infected \textit{Malus} leaf.} DSLR macro time-lapse of a representative healthy rust-infected \textit{Malus} leaf imaged under the laboratory protocol with the adaxial surface in contact with the cooled substrate. Droplets near the orange-yellow rust aecium are smaller and disappear first as the evaporation front propagates outward, reproducing the laboratory vapor-sink signature in a natural pathosystem.
 
 
 \end{document}

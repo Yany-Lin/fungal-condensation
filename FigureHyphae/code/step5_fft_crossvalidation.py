@@ -13,9 +13,12 @@ from PIL import Image
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-ROI_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Analysis/results/3d_overlays')
+_T7 = Path('/Volumes/T7/FINAL OSF')
+_REPO = Path(__file__).resolve().parent.parent.parent
+BASE = _T7 if _T7.exists() else _REPO
+ROI_DIR = BASE / 'HYPHAE' / 'Analysis' / 'results' / '3d_overlays'
 SESSION = ROI_DIR / 'roi_session.json'
-OUT = Path('/Volumes/T7/FINAL OSF/FigureHyphae/figures')
+OUT = BASE / 'FigureHyphae' / 'figures'
 CAL = 0.94  # µm/px
 MM = 1/25.4
 C_ASP = '#4CAF50'; C_MUC = '#757575'

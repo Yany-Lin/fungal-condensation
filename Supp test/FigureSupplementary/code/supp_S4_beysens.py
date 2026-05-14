@@ -19,7 +19,7 @@ sys.path.insert(0, str(__import__('pathlib').Path(__file__).parent))
 from supp_common import (
     CONDITIONS, DELTA, ALL_TRIALS, OUTPUT_DIR, MM, TICK_SIZE, LABEL_SIZE,
     PANEL_LBL, LW_SPINE, apply_style, clean_axes, load_droplets,
-    load_boundary, steiner_bin_area, save_fig,
+    load_boundary, steiner_bin_area, save_fig, display_label,
 )
 
 BIN_WIDTH_UM     = 300
@@ -303,8 +303,11 @@ def plot_composite(exemplars, all_profiles, all_ts):
         ax.text(-0.10, 1.10, panel_letters[idx], transform=ax.transAxes,
                 fontsize=PANEL_LBL, va='top')
 
-        # Condition + trial as coloured title
-        ax.set_title(f'{cond_label}  ({tid})', fontsize=TICK_SIZE,
+        # Condition + trial as coloured title (display label uses genus names;
+        # for fungi the genus is already in the trial-ID, so avoid duplication)
+        _disp = display_label(tid)
+        _title = _disp if _disp.startswith(cond_label + '.') else f'{cond_label}  ({_disp})'
+        ax.set_title(_title, fontsize=TICK_SIZE,
                      color=cond_color, fontweight='bold', pad=3)
 
         if idx == 0:

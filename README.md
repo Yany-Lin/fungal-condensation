@@ -1,4 +1,4 @@
-# Fungal Hyphae as Distributed Hygroscopic Vapor Sinks
+# Fungal Hyphae as Distributed Vapor Sinks
 
 Code and analysis pipeline for reproducing all quantitative figures and tables in the manuscript.
 
@@ -31,7 +31,19 @@ Code and analysis pipeline for reproducing all quantitative figures and tables i
 │       ├── step5_universal_panels.py    # Panels D, E (universal collapse)
 │       └── make_panel_delta_strip.py    # Panel F (δ swarm plot)
 │
-├── FigureRSR/              # Figure 4: Rain-shadow-ridge panels B–G
+├── FigureHyphae/           # Figure 4: Colony architecture panels C–F (FFT slope, structure thickness, Hessian tubeness CV, erosion survival)
+│   ├── code/
+│   │   ├── step0_calibrate_segmentation.py # Adaptive-threshold calibration vs Hildebrand thickness
+│   │   ├── step1_compute_all_metrics.py    # Per-ROI metric computation
+│   │   ├── step2_tortuosity_test.py        # D_eff/D0 supplementary cross-check
+│   │   ├── step3_interfacial_area.py       # Surface-to-volume ratio decomposition
+│   │   ├── step4_framework_validation.py   # Effect sizes + Welch's t
+│   │   ├── step5_fft_crossvalidation.py    # GLCM contrast cross-validation of FFT slope
+│   │   ├── step_final_rebuild_all.py       # End-to-end rebuild of all Figure 4 panels
+│   │   └── make_supplementary_figures.py   # Supp Figs 9–14
+│   └── output/                              # figure4_3d_metrics.csv, framework_validation_comprehensive.csv, etc.
+│
+├── FigureRSR/              # Figure 5: Field validation (Gymnosporangium on Malus) panels B–G
 │   └── code/
 │       ├── step1_figure_RSR.py          # Panel B (RSR scatter)
 │       ├── step2_rsr_metrics_and_universal_plots.py  # Universal metrics + panels
@@ -39,7 +51,7 @@ Code and analysis pipeline for reproducing all quantitative figures and tables i
 │       ├── make_panel_zone_metric.py    # Zone metric analysis
 │       └── make_rsr_mask_overlays.py    # Mask overlay visualizations
 │
-├── FigureSupplementary/    # Supplementary Figures S1–S17
+├── Supp test/FigureSupplementary/  # Supplementary Figures S1–S15
 │   └── code/
 │       ├── supp_common.py               # Shared utilities and paths
 │       ├── supp_S1_km_sensitivity.py    # KM sensitivity grid
@@ -148,16 +160,16 @@ python FigureFungi/code/step5_universal_panels.py
 # Figure 3 panel F
 python FigureFungi/code/make_panel_delta_strip.py
 
-# Figure 3 panels I, J
-python "Hyphal Analysis/spectral_slope_analysis.py"
+# Figure 4 panels C-F (colony architecture)
+python FigureHyphae/code/step_final_rebuild_all.py
 
-# Figure 4 panel B
+# Figure 5 panel B (field RSR scatter)
 python FigureRSR/code/step1_figure_RSR.py
 
-# Figure 4 panel E (KM survival)
+# Figure 5 panel E (KM survival)
 python FigureRSR/code/make_panel_E_rsr.py
 
-# Figure 4 universal metrics
+# Figure 5 universal metrics
 python FigureRSR/code/step2_rsr_metrics_and_universal_plots.py
 
 # Metrics table
@@ -171,6 +183,8 @@ Typical run time: < 30 seconds per script on a standard machine.
 The full pipeline starting from raw microscopy images requires the raw data hosted on Zenodo. Place raw data directories under each `Figure*/raw_data/` and run the `step0`/`step1` scripts first, then proceed with subsequent steps in numerical order.
 
 Steps involving Cellpose segmentation (`step0_segment_droplets.py`) take ~2-5 minutes per trial on a machine with GPU; ~10-20 minutes on CPU only.
+
+The `FigureHyphae/code/step*.py` scripts read ROI sessions from `HYPHAE/Analysis/results/3d_overlays/` and light-microscopy images from `HYPHAE/Light Microscopy/`. Unpack `HYPHAE_3D_Aspergillus_raw.zip`, `HYPHAE_3D_Mucor_raw.zip`, and the three `HYPHAE_LightMicro_*.zip` archives from Zenodo into those locations (the scripts auto-detect both a local Yany absolute path and the repo-relative fallback). Processed CSVs in `FigureHyphae/output/` are sufficient to regenerate all Figure 4 panels without re-running step0-step5.
 
 ## Key Algorithms
 
@@ -194,4 +208,4 @@ This project is licensed under the MIT License -- see [LICENSE](LICENSE) for det
 
 If you use this code, please cite:
 
-> Lin, Y.J., Feng, L., Khan, A., Park, K.-C. & Jung, S. Fungal Hyphae as Distributed Hygroscopic Vapor Sinks. *Nature Communications* (2025). https://doi.org/10.5281/zenodo.19391416
+> Lin, Y.J., Feng, L., Khan, A., Park, K.-C. & Jung, S. Fungal Hyphae as Distributed Vapor Sinks. (2026). https://doi.org/10.5281/zenodo.19391416

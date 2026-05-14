@@ -17,7 +17,7 @@ sys.path.insert(0, str(__import__('pathlib').Path(__file__).parent))
 from supp_common import (
     DELTA, CONDITIONS, HG_AGG_DIR, FG_AGG_DIR,
     OUTPUT_DIR, MM, TICK_SIZE, LABEL_SIZE,
-    apply_style, clean_axes, save_fig,
+    apply_style, clean_axes, save_fig, display_label,
 )
 
 T_WINDOW  = (14.5, 15.5)
@@ -27,7 +27,6 @@ MAX_DIST  = 2500   # µm
 
 OUT_DIR = OUTPUT_DIR / 'S3'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-
 
 def agg_dir(tid):
     if tid.startswith(('Green', 'white', 'black')):
@@ -88,7 +87,7 @@ def main():
             clean_axes(ax)
             ax.tick_params(labelsize=TICK_SIZE - 0.5, pad=2)
 
-            ax.text(0.97, 0.97, tid, transform=ax.transAxes,
+            ax.text(0.97, 0.97, display_label(tid), transform=ax.transAxes,
                     fontsize=TICK_SIZE - 1.5, ha='right', va='top',
                     color=cond_color, alpha=0.80)
 

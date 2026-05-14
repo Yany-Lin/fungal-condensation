@@ -14,10 +14,13 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-RSR = Path('/Volumes/T7/FINAL OSF/FigureRSR/output/rsr_and_lab_dstar_metrics.csv')
-HG  = Path('/Volumes/T7/FINAL OSF/FigureHGAggregate/output/hydrogel_metrics.csv')
-OUT = Path('/Users/yany/Downloads')
-FINAL = Path('/Volumes/T7/FINAL OSF/HYPHAE/Final Results')
+_T7 = Path('/Volumes/T7/FINAL OSF')
+_REPO = Path(__file__).resolve().parent.parent.parent
+BASE = _T7 if _T7.exists() else _REPO
+RSR = BASE / 'FigureRSR' / 'output' / 'rsr_and_lab_dstar_metrics.csv'
+HG  = BASE / 'FigureHGAggregate' / 'output' / 'hydrogel_metrics.csv'
+OUT = BASE / 'FigureHyphae' / 'output'
+FINAL = BASE / 'HYPHAE' / 'Final Results'
 
 MM = 1 / 25.4
 C_ASP = '#4CAF50'

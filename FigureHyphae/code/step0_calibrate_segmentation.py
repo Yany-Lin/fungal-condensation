@@ -14,7 +14,10 @@ from scipy import ndimage as ndi
 from pathlib import Path
 from PIL import Image
 
-ROI_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Analysis/results/3d_overlays')
+_T7 = Path('/Volumes/T7/FINAL OSF')
+_REPO = Path(__file__).resolve().parent.parent.parent
+BASE = _T7 if _T7.exists() else _REPO
+ROI_DIR = BASE / 'HYPHAE' / 'Analysis' / 'results' / '3d_overlays'
 SESSION = ROI_DIR / 'roi_session.json'
 CAL = 0.94  # µm/px
 

@@ -14,14 +14,17 @@ from matplotlib.lines import Line2D
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-ROI_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Analysis/results/3d_overlays')
-HESSIAN_LM = Path('/Volumes/T7/FINAL OSF/HYPHAE/Analysis/results/hessian_overlays')
+_T7 = Path('/Volumes/T7/FINAL OSF')
+_REPO = Path(__file__).resolve().parent.parent.parent
+BASE = _T7 if _T7.exists() else _REPO
+ROI_DIR = BASE / 'HYPHAE' / 'Analysis' / 'results' / '3d_overlays'
+HESSIAN_LM = BASE / 'HYPHAE' / 'Analysis' / 'results' / 'hessian_overlays'
 SESSION = ROI_DIR / 'roi_session.json'
-MICRO_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Light Microscopy')
-RSR_CSV = Path('/Volumes/T7/FINAL OSF/FigureRSR/output/rsr_and_lab_dstar_metrics.csv')
-FIG_OUT = Path('/Volumes/T7/FINAL OSF/FigureHyphae/figures')
-CSV_OUT = Path('/Volumes/T7/FINAL OSF/FigureHyphae/output')
-HANDOFF = Path('/Users/yany/Downloads/manuscript_handoff')
+MICRO_DIR = BASE / 'HYPHAE' / 'Light Microscopy'
+RSR_CSV = BASE / 'FigureRSR' / 'output' / 'rsr_and_lab_dstar_metrics.csv'
+FIG_OUT = BASE / 'FigureHyphae' / 'figures'
+CSV_OUT = BASE / 'FigureHyphae' / 'output'
+HANDOFF = CSV_OUT
 CAL_3D = 0.94; MM = 1/25.4
 C_ASP = '#4CAF50'; C_MUC = '#757575'
 HESSIAN_SCALES = [1, 2, 4, 8, 16]

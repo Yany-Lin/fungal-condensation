@@ -17,10 +17,13 @@ from pathlib import Path
 from PIL import Image
 import time
 
-ROI_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Analysis/results/3d_overlays')
+_T7 = Path('/Volumes/T7/FINAL OSF')
+_REPO = Path(__file__).resolve().parent.parent.parent
+BASE = _T7 if _T7.exists() else _REPO
+ROI_DIR = BASE / 'HYPHAE' / 'Analysis' / 'results' / '3d_overlays'
 SESSION = ROI_DIR / 'roi_session.json'
-MICRO_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Light Microscopy')
-OUT = Path('/Users/yany/Downloads')
+MICRO_DIR = BASE / 'HYPHAE' / 'Light Microscopy'
+OUT = BASE / 'FigureHyphae' / 'output'
 
 CAL_3D = 0.94  # µm/px for 3D ROIs
 

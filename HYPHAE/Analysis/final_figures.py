@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-"""Generate final publication figures.
+"""Generate final publication figures for Figure 4.
 
-1. final_figure: 4 boxplots (FFT colony, FFT 3D, local density CV, lacunarity)
-2. effect_size_forest_plot: 4-row forest plot of same metrics
+4 boxplots:
+  C: FFT spectral slope alpha (3D manual ROIs)
+  D: Local density CV (3D manual ROIs)
+  E: Local density CV (light microscopy, analyze_fungi.py segmentation)
+  F: Local density p90-p10 range (light microscopy)
 """
 
 import json
@@ -14,9 +17,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy import stats
+from scipy.ndimage import laplace
 
 BASE    = Path(__file__).resolve().parents[1]
 OUT_DIR = BASE / 'Final Results'
+ROI_DIR = BASE / 'Analysis' / 'results' / '3d_overlays'
 
 MM = 1 / 25.4
 C_ASP = '#4CAF50'
@@ -67,43 +72,91 @@ def boxstrip(ax, sa, sm, ylabel):
     add_bracket(ax, sa, sm)
 
 
-def cohens_d_ci(d, n1, n2):
-    se = np.sqrt((n1 + n2) / (n1 * n2) + d**2 / (2 * (n1 + n2)))
-    z = 1.96
-    return d - z * se, d + z * se
+def otsu_uint8(img8):
+    hist = np.bincount(img8.ravel(), minlength=256).astype(float)
+    total = hist.sum()
+    w_bg = np.cumsum(hist)
+    w_fg = total - w_bg
+    sum_bg = np.cumsum(hist * np.arange(256))
+    mean_bg = sum_bg / np.maximum(w_bg, 1)
+    mean_fg = (sum_bg[-1] - sum_bg) / np.maximum(w_fg, 1)
+    var = w_bg * w_fg * (mean_bg - mean_fg) ** 2
+    return int(np.argmax(var))
+
+
+def load_gray(path):
+    from PIL import Image
+    with Image.open(path) as im:
+        arr = np.asarray(im).astype(np.float64)
+    if arr.ndim == 3:
+        arr = arr[..., :3].mean(axis=2)
+    return arr
 
 
 def load_data():
-    """Load the 4 datasets and return (label, asp_values, muc_values, scale_label)."""
+    """Load the 4 datasets."""
     datasets = []
 
-    # 1. FFT colony surface
-    fft = pd.read_csv(OUT_DIR / 'fft_spectral_slopes.csv')
-    datasets.append((
-        r'Spectral slope $\alpha$' + '\n(colony surface)',
-        fft.loc[fft['genus'] == 'Aspergillus', 'alpha'].values,
-        fft.loc[fft['genus'] == 'Mucor', 'alpha'].values,
-        'Colony surface',
-    ))
-
-    # 2. FFT 3D macro
-    session_path = BASE / 'Analysis' / 'results' / '3d_overlays' / 'roi_session.json'
+    # ── Panel C: FFT alpha on 3D ROIs ──
+    session_path = ROI_DIR / 'roi_session.json'
     with open(session_path) as f:
         session = json.load(f)
     saved = {k: v for k, v in session.items()
              if not k.startswith('_') and v.get('status') != 'deleted'}
-    asp_3d = np.array([v['alpha'] for v in saved.values()
-                       if v.get('genus') == 'Aspergillus' and v.get('alpha') is not None])
-    muc_3d = np.array([v['alpha'] for v in saved.values()
-                       if v.get('genus') == 'Mucor' and v.get('alpha') is not None])
+    asp_fft = np.array([v['alpha'] for v in saved.values()
+                        if v.get('genus') == 'Aspergillus' and v.get('alpha') is not None])
+    muc_fft = np.array([v['alpha'] for v in saved.values()
+                        if v.get('genus') == 'Mucor' and v.get('alpha') is not None])
     datasets.append((
-        r'Spectral slope $\alpha$' + '\n(3D macro)',
-        asp_3d, muc_3d,
-        '3D macro',
+        r'Spectral slope $\alpha$' + '\n(3D colony surface)',
+        asp_fft, muc_fft,
+        '3D',
     ))
 
-    # 3. Local density CV
-    fungi = pd.read_csv('/Users/yany/Desktop/Leyun microscopy/analysis_outputs/fungi_metrics.csv')
+    # ── Panel D: Local density CV on 3D ROIs ──
+    # No segmentation — analyze the raw crop directly.
+    # The manual ROI IS the region of interest. Dark pixels = tissue, light = gaps.
+    # Measure mean intensity per patch; CV of patch means = spatial heterogeneity.
+    cal = session['_calibration']['um_per_px']
+    patch_px = int(round(256.0 / cal))  # 256 um patches
+
+    cv_asp, cv_muc = [], []
+    for key, val in saved.items():
+        genus = val.get('genus')
+        roi_path = ROI_DIR / genus / f'{Path(key).stem}_roi.jpg'
+        if not roi_path.exists():
+            continue
+        img = load_gray(roi_path)
+        # Normalize to [0,1] so patches are comparable across images
+        lo, hi = np.percentile(img, [0.5, 99.5])
+        if hi <= lo: hi = lo + 1
+        img_norm = np.clip((img - lo) / (hi - lo), 0, 1)
+        h, w = img_norm.shape
+        patch_means = []
+        for y0 in range(0, h - patch_px + 1, patch_px):
+            for x0 in range(0, w - patch_px + 1, patch_px):
+                patch_means.append(img_norm[y0:y0+patch_px, x0:x0+patch_px].mean())
+        if len(patch_means) < 4:
+            continue
+        patch_means = np.array(patch_means)
+        cv = patch_means.std(ddof=1) / patch_means.mean() if patch_means.mean() > 0 else 0
+        if genus == 'Aspergillus':
+            cv_asp.append(cv)
+        else:
+            cv_muc.append(cv)
+
+    datasets.append((
+        'Local density CV\n(3D colony surface)',
+        np.array(cv_asp), np.array(cv_muc),
+        '3D',
+    ))
+
+    # ── Panels E & F: from light microscopy (already computed) ──
+    # Legacy Leyun-side CSV; fall back to repo-local copy under HYPHAE/Analysis/results/.
+    _legacy = Path('/Users/yany/Desktop/Leyun microscopy/analysis_outputs/fungi_metrics.csv')
+    _local  = Path(__file__).resolve().parent / 'results' / 'fungi_metrics.csv'
+    fungi = pd.read_csv(_legacy if _legacy.exists() else _local)
+
     datasets.append((
         'Local density CV\n(light microscopy)',
         fungi.loc[fungi['label'] == 'Green', 'local_density_cv'].values,
@@ -111,13 +164,11 @@ def load_data():
         'Light Microscopy',
     ))
 
-    # 4. Lacunarity
-    frag = pd.read_csv(OUT_DIR / 'fragmentation_results.csv')
     datasets.append((
-        'Lacunarity\n(3D macro)',
-        frag.loc[frag['genus'] == 'Aspergillus', 'lacunarity_max_scale'].values,
-        frag.loc[frag['genus'] == 'Mucor', 'lacunarity_max_scale'].values,
-        '3D macro',
+        'Local density\np90 \u2013 p10\n(light microscopy)',
+        fungi.loc[fungi['label'] == 'Green', 'local_density_p90_minus_p10'].values,
+        fungi.loc[fungi['label'] == 'White', 'local_density_p90_minus_p10'].values,
+        'Light Microscopy',
     ))
 
     return datasets
@@ -139,80 +190,25 @@ def make_final_figure(datasets):
     print(f'Saved: final_figure.{{png,pdf,svg}}')
 
 
-def make_forest_plot(datasets):
-    scale_colors = {
-        'Colony surface': '#1976D2',
-        '3D macro': '#FF9800',
-        'Light Microscopy': '#4CAF50',
-    }
+def main():
+    datasets = load_data()
 
-    # Compute effect sizes
-    items = []
-    for label, sa, sm, scale in datasets:
-        clean_label = label.replace('\n', ' ')
+    # Print stats
+    labels = ['Panel C (FFT 3D)', 'Panel D (CV 3D)',
+              'Panel E (CV Light Micro)', 'Panel F (p90-p10 Light Micro)']
+    for label, (ylabel, sa, sm, _) in zip(labels, datasets):
+        t, p = stats.ttest_ind(sa, sm, equal_var=False)
         n1, n2 = len(sa), len(sm)
         pooled = np.sqrt(((n1-1)*sa.std(ddof=1)**2 + (n2-1)*sm.std(ddof=1)**2) / (n1+n2-2))
         d = (sa.mean() - sm.mean()) / pooled if pooled > 0 else 0
-        ci_lo, ci_hi = cohens_d_ci(d, n1, n2)
-        t, p = stats.ttest_ind(sa, sm, equal_var=False)
-        items.append((clean_label, d, ci_lo, ci_hi, p, scale))
+        print(f'{label}:')
+        print(f'  Asp: {sa.mean():.4f} +/- {sa.std(ddof=1):.4f} (n={n1})')
+        print(f'  Muc: {sm.mean():.4f} +/- {sm.std(ddof=1):.4f} (n={n2})')
+        print(f'  Welch t={t:.3f}, p={p:.6f}, d={d:.3f}')
+        print()
 
-    # Sort by scale then |d|
-    scale_order = {'Colony surface': 0, '3D macro': 1, 'Light Microscopy': 2}
-    items.sort(key=lambda x: (scale_order.get(x[5], 9), -abs(x[1])))
-
-    n = len(items)
-    fig, ax = plt.subplots(figsize=(120 * MM, 55 * MM))
-    fig.subplots_adjust(left=0.42, right=0.92, top=0.92, bottom=0.12)
-
-    y_pos = np.arange(n)[::-1]
-
-    for i, (label, d, ci_lo, ci_hi, p, scale) in enumerate(items):
-        yp = y_pos[i]
-        color = scale_colors.get(scale, '#666')
-        ax.plot([ci_lo, ci_hi], [yp, yp], color=color, lw=2.5, solid_capstyle='round')
-        ax.plot(d, yp, 'o', color=color, markersize=8, zorder=5)
-
-        if p < 0.001:
-            star = '***'
-        elif p < 0.01:
-            star = '**'
-        elif p < 0.05:
-            star = '*'
-        else:
-            star = ''
-        x_text = max(ci_hi, abs(ci_lo)) + 0.15
-        ax.text(ci_hi + 0.12, yp, star, va='center', fontsize=9,
-                fontweight='bold', color=color)
-
-    labels = [item[0] for item in items]
-    ax.set_yticks(y_pos)
-    ax.set_yticklabels(labels, fontsize=8)
-    ax.axvline(0, color='k', lw=0.8)
-    ax.set_xlabel("Cohen's d  (Asp vs Muc)", fontsize=9)
-    ax.set_title('Effect sizes across imaging scales', fontsize=10, fontweight='bold')
-
-    for scale, color in scale_colors.items():
-        ax.plot([], [], 'o-', color=color, label=scale, markersize=6, lw=2)
-    ax.legend(fontsize=7, loc='lower right', framealpha=0.9)
-
-    for sp in ['top', 'right']:
-        ax.spines[sp].set_visible(False)
-
-    for ext in ('.png', '.pdf'):
-        kw = {'bbox_inches': 'tight', 'facecolor': 'white'}
-        if ext == '.png':
-            kw['dpi'] = 300
-        fig.savefig(OUT_DIR / f'effect_size_forest_plot{ext}', **kw)
-    plt.close(fig)
-    print(f'Saved: effect_size_forest_plot.{{png,pdf}}')
-
-
-def main():
-    datasets = load_data()
     make_final_figure(datasets)
-    make_forest_plot(datasets)
-    print(f'\nAll saved to {OUT_DIR}/')
+    print(f'All saved to {OUT_DIR}/')
 
 
 if __name__ == '__main__':

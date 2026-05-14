@@ -17,11 +17,14 @@ import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
-ROI_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Analysis/results/3d_overlays')
-HESSIAN_LM = Path('/Volumes/T7/FINAL OSF/HYPHAE/Analysis/results/hessian_overlays')
+_T7 = Path('/Volumes/T7/FINAL OSF')
+_REPO = Path(__file__).resolve().parent.parent.parent
+BASE = _T7 if _T7.exists() else _REPO
+ROI_DIR = BASE / 'HYPHAE' / 'Analysis' / 'results' / '3d_overlays'
+HESSIAN_LM = BASE / 'HYPHAE' / 'Analysis' / 'results' / 'hessian_overlays'
 SESSION = ROI_DIR / 'roi_session.json'
-MICRO_DIR = Path('/Volumes/T7/FINAL OSF/HYPHAE/Light Microscopy')
-OUT = Path('/Volumes/T7/FINAL OSF/FigureHyphae/figures')
+MICRO_DIR = BASE / 'HYPHAE' / 'Light Microscopy'
+OUT = BASE / 'FigureHyphae' / 'figures'
 CAL_3D = 0.94; MM = 1/25.4
 C_ASP = '#4CAF50'; C_MUC = '#757575'
 
@@ -408,7 +411,7 @@ ft_a, ft_m = np.array(ft_a), np.array(ft_m)
 dt_a, dt_m = np.array(dt_a), np.array(dt_m)
 cap_a, cap_m = np.array(cap_a), np.array(cap_m)
 
-iface = pd.read_csv('/Volumes/T7/FINAL OSF/FigureHyphae/output/interfacial_metrics_3d.csv')
+iface = pd.read_csv(BASE / 'FigureHyphae' / 'output' / 'interfacial_metrics_3d.csv')
 ssa_a = iface.loc[iface['genus'] == 'Aspergillus', 'specific_surface'].values
 ssa_m = iface.loc[iface['genus'] == 'Mucor', 'specific_surface'].values
 

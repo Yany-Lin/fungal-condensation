@@ -21,7 +21,11 @@ import pandas as pd
 from scipy import stats
 
 # ── paths ──
-METRICS_CSV = Path('/Users/yany/Desktop/Leyun microscopy/analysis_outputs/fungi_metrics.csv')
+# Original metrics CSV was produced on Leyun's machine by analyze_fungi.py.
+# A reproducible copy of the relevant subset is in HYPHAE/Final Results/.
+_legacy = Path('/Users/yany/Desktop/Leyun microscopy/analysis_outputs/fungi_metrics.csv')
+_local  = Path(__file__).resolve().parent / 'results' / 'fungi_metrics.csv'
+METRICS_CSV = _legacy if _legacy.exists() else _local
 OUT_DIR = Path(__file__).resolve().parent / 'results'
 OUT_DIR.mkdir(exist_ok=True)
 
