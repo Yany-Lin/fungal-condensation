@@ -47,3 +47,8 @@ supplementary_videos_final/
 
 # Legacy supplementary scaffolding (superseded by Supp test/FigureSupplementary/)
 Experimental/
+
+# Obsolete SI builds (canonical SI is supplementary_information.pdf at repo root)
+Supplementary Figures/Supplementary.pdf
+supplementary_information.aux
+supplementary_information.log
