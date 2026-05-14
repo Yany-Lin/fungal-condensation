@@ -28,7 +28,13 @@ from supp_common import (
 )
 
 BASE_DIR  = Path(__file__).resolve().parent.parent.parent.parent
-CSV_PATH  = BASE_DIR / 'Methods Figure ' / 'ChamberModel' / 'NATURE_model_13trials.csv'
+# Canonical (Yany-local) location of the chamber-model time series.
+# The same file is mirrored to the Zenodo deposit as chamber_stability_13trials.csv;
+# a user reproducing from the deposit can place that file at the repo root and the
+# fallback below will pick it up.
+_canonical = BASE_DIR / 'Methods Figure ' / 'ChamberModel' / 'NATURE_model_13trials.csv'
+_fallback  = BASE_DIR / 'chamber_stability_13trials.csv'
+CSV_PATH  = _canonical if _canonical.exists() else _fallback
 OUT_DIR   = OUTPUT_DIR / 'S18'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
