@@ -589,7 +589,7 @@ ax.text(-0.06, 1.06, 'A', transform=ax.transAxes, fontsize=13, fontweight='bold'
 # Panel B: Tubeness CV boxplot (all images)
 ax = fig.add_subplot(gs[1, 0])
 stripbox(ax, tubcv_a, tubcv_m, 'Tubeness CV')
-ax.set_title('All images (n=6 + n=3)', fontsize=7)
+ax.set_title('All images', fontsize=7)
 ax.text(-0.14, 1.06, 'B', transform=ax.transAxes, fontsize=13, fontweight='bold', va='top')
 
 # Panel C: Per-magnification comparison

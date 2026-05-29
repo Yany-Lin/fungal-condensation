@@ -194,7 +194,7 @@ def main():
             m_str = f'{m_vals.mean():.3f}' if len(m_vals) else 'N/A'
             print(f'    {mag}X: Asp={a_str}, Muc={m_str}')
 
-    fig.suptitle('Magnification confound check — top 6 metrics', fontsize=9, fontweight='bold')
+    fig.suptitle('Magnification confound check: top 6 metrics', fontsize=9, fontweight='bold')
     fig.tight_layout(rect=[0, 0, 1, 0.94])
     mag_path = OUT_DIR / 'light_micro_mag_confound.png'
     fig.savefig(mag_path, dpi=200, bbox_inches='tight', facecolor='white')

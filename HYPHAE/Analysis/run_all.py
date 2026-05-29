@@ -279,34 +279,24 @@ def compute_porosity(mask):
 
 
 def make_hessian_overlay(img, tubeness, mask, pores, fname, metrics, out_path):
-    """4-panel QC overlay for Hessian analysis."""
-    fig, axes = plt.subplots(2, 2, figsize=(14, 12))
+    """3-panel QC overlay for Hessian analysis (porosity panel dropped)."""
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
-    axes[0, 0].imshow(img, cmap='gray')
-    axes[0, 0].set_title('Original', fontsize=10)
-    axes[0, 0].axis('off')
+    axes[0].imshow(img, cmap='gray')
+    axes[0].set_title('Original', fontsize=10)
+    axes[0].axis('off')
 
-    axes[0, 1].imshow(tubeness, cmap='inferno')
-    axes[0, 1].set_title('Multi-scale Hessian tubeness', fontsize=10)
-    axes[0, 1].axis('off')
+    axes[1].imshow(tubeness, cmap='inferno')
+    axes[1].set_title('Multi-scale Hessian tubeness', fontsize=10)
+    axes[1].axis('off')
 
     rgb = np.stack([img, img, img], axis=-1).copy()
     rgb[mask, 0] = np.clip(rgb[mask, 0] + 0.4, 0, 1)
     rgb[mask, 1] *= 0.4
     rgb[mask, 2] *= 0.4
-    axes[1, 0].imshow(rgb)
-    axes[1, 0].set_title(f'Detected structures (fg={metrics["fg_frac"]:.1%})', fontsize=10)
-    axes[1, 0].axis('off')
-
-    class_img = np.full((*img.shape, 3), 0.12)
-    solid = mask & ~pores
-    class_img[solid] = [0.2, 0.4, 0.9]
-    class_img[pores] = [1.0, 0.9, 0.2]
-    axes[1, 1].imshow(class_img)
-    axes[1, 1].set_title(
-        f'Internal: solid (blue) + pores (yellow) | '
-        f'porosity={metrics["w_porosity"]:.3f}', fontsize=10)
-    axes[1, 1].axis('off')
+    axes[2].imshow(rgb)
+    axes[2].set_title(f'Detected structures (fg={metrics["fg_frac"]:.1%})', fontsize=10)
+    axes[2].axis('off')
 
     fig.suptitle(f'{fname}  ({metrics["genus"]} {metrics["mag"]}X)',
                  fontsize=12, fontweight='bold')

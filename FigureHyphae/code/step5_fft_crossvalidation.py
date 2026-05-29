@@ -219,7 +219,7 @@ for genus, color, label in [('Aspergillus', C_ASP, 'Asp'), ('Mucor', C_MUC, 'Muc
     # Convert to spatial wavelength (µm)
     wl = 1.0 / (freq / CAL + 1e-12)  # µm per cycle
 
-    ax.loglog(freq, mean_p, color=color, lw=1.5, label=f'{label} (n={len(specs)})')
+    ax.loglog(freq, mean_p, color=color, lw=1.5, label=f'{label}')
     ax.fill_between(freq, mean_p - sem_p, mean_p + sem_p, color=color, alpha=0.15)
 
 # Show fit region

@@ -68,7 +68,7 @@ def segment_folder(input_folder, model, diameter, flow_threshold,
         if count > 0:
             ax.imshow(plot.mask_rgb(masks), alpha=0.5)
         ax.axis('off')
-        ax.set_title(f"{filename} — {count} droplets")
+        ax.set_title(f"{filename}: {count} droplets")
         fig.savefig(os.path.join(output_folder, f"{base}_segmentation.png"),
                     bbox_inches='tight', dpi=150)
         plt.close(fig)

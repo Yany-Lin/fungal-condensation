@@ -60,9 +60,9 @@ def panel_regression(ax, df, x_col, y_col, ylabel, panel_letter, title,
     h = df[df['system'] == 'Hydrogel']
     f = df[df['system'] == 'Fungi']
     ax.scatter(h[x_col], h[y_col], s=30, c=C_HYDRO, edgecolors='white',
-               linewidths=0.4, label='Hydrogel (n=20)', alpha=0.85, zorder=3)
+               linewidths=0.4, label='Hydrogel', alpha=0.85, zorder=3)
     ax.scatter(f[x_col], f[y_col], s=30, c=C_FUNGI, edgecolors='white',
-               linewidths=0.4, label='Fungi (n=15)', alpha=0.85, zorder=3)
+               linewidths=0.4, label='Fungi', alpha=0.85, zorder=3)
 
     (sl_h, ic_h), (sl_f, ic_f) = fit_separate(df, x_col, y_col)
     sl_u, ic_u = fit_universal(df, x_col, y_col)

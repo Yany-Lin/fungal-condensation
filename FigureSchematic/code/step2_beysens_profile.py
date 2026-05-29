@@ -214,7 +214,7 @@ def plot_trial(profile, ts, tid, delta_um, out_path):
     plt.colorbar(sm, ax=ax, label="r' (mm)")
     ax.set_xlabel('Time (min)', fontsize=9)
     ax.set_ylabel('⟨R⟩ (μm)', fontsize=9)
-    ax.set_title("All bins — colored by r'", fontsize=9)
+    ax.set_title("All bins, colored by r'", fontsize=9)
     ax.legend(fontsize=7, loc='upper left')
     ax.set_xlim(T_MIN, T_MAX);  ax.set_ylim(0, R_MAX)
     for sp in ['top', 'right']:

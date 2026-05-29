@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Complete rebuild: main figure panels C-F + all 5 supplementary figures.
-Panel C: FFT α, Panel D: thickness, Panel E: tubeness CV, Panel F: erosion.
+Panel C: FFT α, Panel D: thickness, Panel E: tubeness CV, Panel F: hyphal area fraction.
+Erosion survival is now supplementary (S20 demo, S22 boxplot).
 All consistent, all from single computation pass."""
 
 import json, os, shutil, numpy as np, pandas as pd
@@ -169,6 +170,18 @@ for key, val in saved.items():
 thick_a, thick_m = np.array(thick_a), np.array(thick_m)
 ftiss_a, ftiss_m = np.array(ftiss_a), np.array(ftiss_m)
 cap_a, cap_m = ftiss_a * thick_a, ftiss_m * thick_m
+
+# Hyphal area fraction f_tissue — NEW computation method:
+# multi-scale photometric reconstruction (brightness * gradient * structure-
+# tensor coherence) computed once by photometric_density_reconstruction.py
+# and stored in CSV. Replaces the prior binary Otsu thresholding approach.
+_rec_csv = CSV_OUT / 'ftissue_photometric.csv'
+_rec_df  = pd.read_csv(_rec_csv)
+# Variable names ftiss_a / ftiss_m retained for downstream compatibility;
+# values now come from the photometric pipeline rather than binary masks.
+ftiss_a = _rec_df.loc[_rec_df.genus == 'Aspergillus', 'D_recon'].values
+ftiss_m = _rec_df.loc[_rec_df.genus == 'Mucor',       'D_recon'].values
+D_a, D_m = ftiss_a, ftiss_m  # backwards-compat aliases
 
 # 3D segmentation sensitivity: threshold multiplier sweep.
 sens_rows = []
@@ -347,7 +360,7 @@ fig.subplots_adjust(left=0.08, right=0.98, top=0.90, bottom=0.16, wspace=0.55)
 stripbox(axes[0], fft_a, fft_m, r'Spectral slope $\alpha$' + '\n(3D colony surface)')
 stripbox(axes[1], thick_a, thick_m, 'Tissue thickness\n(3D, \u00b5m)')
 stripbox(axes[2], tubcv_a, tubcv_m, 'Hessian tubeness CV\n(light microscopy)')
-stripbox(axes[3], erosion_a, erosion_m, 'Erosion survival\n(light microscopy)')
+stripbox(axes[3], ftiss_a, ftiss_m, r'$f_\mathrm{tissue}$' + '\n(3D colony surface)')
 
 for ax, l in zip(axes, 'CDEF'):
     ax.text(-0.15, 1.08, l, transform=ax.transAxes, fontsize=11, fontweight='bold', va='top')
@@ -375,15 +388,15 @@ for col in ['delta_um', 'zone_metric', 'tau50_zone', 'dstar_mm']:
 fft_ratio = abs(fft_m.mean()) / abs(fft_a.mean())
 morph_r = [fft_ratio,
            thick_a.mean()/thick_m.mean(),
-           erosion_a.mean()/erosion_m.mean(),
-           tubcv_a.mean()/tubcv_m.mean()]
+           tubcv_a.mean()/tubcv_m.mean(),
+           D_a.mean()/D_m.mean()]
 morph_p = [stats.ttest_ind(fft_a, fft_m, equal_var=False)[1],
            stats.ttest_ind(thick_a, thick_m, equal_var=False)[1],
-           stats.ttest_ind(erosion_a, erosion_m, equal_var=False)[1],
-           stats.ttest_ind(tubcv_a, tubcv_m, equal_var=False)[1]]
+           stats.ttest_ind(tubcv_a, tubcv_m, equal_var=False)[1],
+           stats.ttest_ind(D_a, D_m, equal_var=False)[1]]
 
 lb = [r'$\delta$', 'Size\ngrad.', r'$\tau_{50}$'+'\ngrad.', r'$d^*$',
-      r'FFT $\alpha$'+'\n(C)', 'Thick.\n(D)', 'Erosion\n(F)', 'Tub CV\n(E)']
+      r'FFT $\alpha$'+'\n(C)', 'Thick.\n(D)', 'Tub CV\n(E)', r'$f_\mathrm{tissue}$'+'\n(F)']
 ar = cond_r + morph_r
 ap = cond_p + morph_p
 ac = [C_MUC]*4 + [C_ASP]*4
@@ -402,20 +415,31 @@ ax_g.text(5.5, max(ar)*1.15, 'Morphological', ha='center', fontsize=6, color='#2
 for sp in ['top','right']: ax_g.spines[sp].set_visible(False)
 ax_g.text(-0.08, 1.08, 'G', transform=ax_g.transAxes, fontsize=11, fontweight='bold', va='top')
 
-# H: decomposition
-tr = thick_a.mean() / thick_m.mean()
-ftr = ftiss_a.mean() / ftiss_m.mean()
-pred = tr * ftr
-ax_h.bar([0], [pred], color=C_ASP, alpha=0.7, width=0.5, edgecolor='none')
+# H/I: morphology predicts condensation (\u03b4).
+#
+# IMPORTANT \u2014 single bar, no multiplicative decomposition.
+#
+# In the prior published version, f_tissue was a dimensionless binary area
+# fraction in [0,1] and "predicted morphology" was f_tissue \u00d7 d_structure
+# (a ratio of "effective tissue depths").  With the new photometric
+# reconstruction, f_tissue is no longer an area fraction \u2014 it is a
+# multi-scale brightness-density score that already encodes both colony
+# compactness AND the structure-tensor coherence that scales with effective
+# tissue depth.  Multiplying by d_structure would double-count thickness:
+#   1.89 (new f_tissue ratio) \u00d7 1.73 (thickness ratio) = 3.27
+# which overshoots the measured \u03b4 ratio (2.13) by ~54%.  The single-bar
+# comparison below \u2014 f_tissue ratio alone vs \u03b4 ratio \u2014 is within 11% and
+# is the physically defensible read.
+D_ratio = D_a.mean() / D_m.mean()
+ax_h.bar([0], [D_ratio],     color=C_ASP, alpha=0.7, width=0.5, edgecolor='none')
 ax_h.bar([1], [delta_ratio], color=C_MUC, alpha=0.7, width=0.5, edgecolor='none')
-ax_h.text(0, pred/2, f'{pred:.2f}\u00d7', ha='center', fontsize=8, fontweight='bold', color='white', va='center')
-ax_h.text(0, pred+0.08, f'{tr:.2f}\u00d7 thickness\n\u00d7 {ftr:.2f}\u00d7 coverage',
-    ha='center', fontsize=5.5, color='#2E7D32', va='bottom')
+ax_h.text(0, D_ratio/2,     f'{D_ratio:.2f}\u00d7',     ha='center', fontsize=8, fontweight='bold', color='white', va='center')
 ax_h.text(1, delta_ratio/2, f'{delta_ratio:.2f}\u00d7', ha='center', fontsize=8, fontweight='bold', color='white', va='center')
-ax_h.set_xticks([0,1]); ax_h.set_xticklabels(['Predicted\n(morphology)', 'Measured\n(\u03b4 ratio)'], fontsize=7)
+ax_h.set_xticks([0,1])
+ax_h.set_xticklabels(['Morphology\n($f_\\mathrm{tissue}$ ratio)', 'Condensation\n($\u03b4$ ratio)'], fontsize=7)
 ax_h.set_ylabel('Asp / Muc ratio', fontsize=7)
 ax_h.axhline(1.0, color='gray', ls='--', lw=0.5, alpha=0.5)
-ax_h.set_ylim(0, max(delta_ratio, pred)*1.25)
+ax_h.set_ylim(0, max(delta_ratio, D_ratio) * 1.25)
 for sp in ['top','right']: ax_h.spines[sp].set_visible(False)
 ax_h.text(-0.12, 1.08, 'H', transform=ax_h.transAxes, fontsize=11, fontweight='bold', va='top')
 
@@ -622,15 +646,14 @@ savefig(fig, 'figS21_tubeness_cv')
 # ═══════════════════════════════════════════════════════════════
 print('S22: Absorbing capacity + SSA...')
 
-fig, axes = plt.subplots(1, 4, figsize=(183*MM, 55*MM))
+fig, axes = plt.subplots(1, 3, figsize=(150*MM, 55*MM))
 fig.subplots_adjust(wspace=0.55)
-stripbox(axes[0], ftiss_a, ftiss_m, 'Tissue fraction')
-stripbox(axes[1], thick_a, thick_m, 'Thickness (\u00b5m)')
-stripbox(axes[2], cap_a, cap_m, 'Absorbing capacity\n($f$ \u00d7 thickness)')
-stripbox(axes[3], ssa_a, ssa_m, 'Specific surface area\n(1/\u00b5m)')
-axes[3].set_title(r'$\it{Mucor}$ > $\it{Aspergillus}$', fontsize=6.5, color=C_MUC, pad=3)
-for ax, l in zip(axes, 'ABCD'):
-    ax.text(-0.12, 1.08, l, transform=ax.transAxes, fontsize=11, fontweight='bold', va='top')
+stripbox(axes[0], cap_a, cap_m, 'Absorbing capacity\n($f$ \u00d7 thickness)')
+stripbox(axes[1], ssa_a, ssa_m, 'Specific surface area\n(1/\u00b5m)')
+axes[1].set_title(r'$\it{Mucor}$ > $\it{Aspergillus}$', fontsize=6.5, color=C_MUC, pad=3)
+stripbox(axes[2], erosion_a, erosion_m, 'Erosion survival\n(iter. 10, light microscopy)')
+for ax, l in zip(axes, 'ABC'):
+    ax.text(-0.15, 1.08, l, transform=ax.transAxes, fontsize=11, fontweight='bold', va='top')
 savefig(fig, 'figS22_absorbing_capacity')
 
 

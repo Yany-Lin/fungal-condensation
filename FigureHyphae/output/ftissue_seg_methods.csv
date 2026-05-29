@@ -1,0 +1,97 @@
+file,genus,method,f_tissue,polarity_flipped
+20251214_221838.JPG,Aspergillus,A: adaptive (current),0.3075,0
+20251214_221838.JPG,Aspergillus,B: Otsu (global),0.5622,0
+20251214_221838.JPG,Aspergillus,C: Frangi + Otsu,0.2486,0
+20251214_221838.JPG,Aspergillus,D: Sauvola local,0.124,0
+20251214_221853.JPG,Aspergillus,A: adaptive (current),0.2963,0
+20251214_221853.JPG,Aspergillus,B: Otsu (global),0.5482,0
+20251214_221853.JPG,Aspergillus,C: Frangi + Otsu,0.2645,0
+20251214_221853.JPG,Aspergillus,D: Sauvola local,0.1167,0
+20251214_221920.JPG,Aspergillus,A: adaptive (current),0.3118,0
+20251214_221920.JPG,Aspergillus,B: Otsu (global),0.4959,0
+20251214_221920.JPG,Aspergillus,C: Frangi + Otsu,0.2779,0
+20251214_221920.JPG,Aspergillus,D: Sauvola local,0.1521,0
+20251214_221942.JPG,Aspergillus,A: adaptive (current),0.2948,0
+20251214_221942.JPG,Aspergillus,B: Otsu (global),0.4591,0
+20251214_221942.JPG,Aspergillus,C: Frangi + Otsu,0.2244,0
+20251214_221942.JPG,Aspergillus,D: Sauvola local,0.1147,0
+20251214_222017.JPG,Aspergillus,A: adaptive (current),0.3032,0
+20251214_222017.JPG,Aspergillus,B: Otsu (global),0.4761,0
+20251214_222017.JPG,Aspergillus,C: Frangi + Otsu,0.2495,0
+20251214_222017.JPG,Aspergillus,D: Sauvola local,0.1656,0
+20251214_222031.JPG,Aspergillus,A: adaptive (current),0.3051,0
+20251214_222031.JPG,Aspergillus,B: Otsu (global),0.4621,0
+20251214_222031.JPG,Aspergillus,C: Frangi + Otsu,0.2747,0
+20251214_222031.JPG,Aspergillus,D: Sauvola local,0.158,0
+20251214_222052.JPG,Aspergillus,A: adaptive (current),0.3064,0
+20251214_222052.JPG,Aspergillus,B: Otsu (global),0.5512,0
+20251214_222052.JPG,Aspergillus,C: Frangi + Otsu,0.2652,0
+20251214_222052.JPG,Aspergillus,D: Sauvola local,0.1434,0
+20251214_222121.JPG,Aspergillus,A: adaptive (current),0.285,0
+20251214_222121.JPG,Aspergillus,B: Otsu (global),0.4258,0
+20251214_222121.JPG,Aspergillus,C: Frangi + Otsu,0.2463,0
+20251214_222121.JPG,Aspergillus,D: Sauvola local,0.0791,0
+20251214_222146.JPG,Aspergillus,A: adaptive (current),0.3005,0
+20251214_222146.JPG,Aspergillus,B: Otsu (global),0.4561,0
+20251214_222146.JPG,Aspergillus,C: Frangi + Otsu,0.2516,0
+20251214_222146.JPG,Aspergillus,D: Sauvola local,0.1356,0
+20251214_222205.JPG,Aspergillus,A: adaptive (current),0.3027,0
+20251214_222205.JPG,Aspergillus,B: Otsu (global),0.509,0
+20251214_222205.JPG,Aspergillus,C: Frangi + Otsu,0.2464,0
+20251214_222205.JPG,Aspergillus,D: Sauvola local,0.1129,0
+20251214_222452.JPG,Aspergillus,A: adaptive (current),0.3035,0
+20251214_222452.JPG,Aspergillus,B: Otsu (global),0.5567,0
+20251214_222452.JPG,Aspergillus,C: Frangi + Otsu,0.2566,0
+20251214_222452.JPG,Aspergillus,D: Sauvola local,0.1019,0
+20251214_222530.JPG,Aspergillus,A: adaptive (current),0.2892,0
+20251214_222530.JPG,Aspergillus,B: Otsu (global),0.5202,0
+20251214_222530.JPG,Aspergillus,C: Frangi + Otsu,0.2385,0
+20251214_222530.JPG,Aspergillus,D: Sauvola local,0.0971,0
+20251214_222552.JPG,Aspergillus,A: adaptive (current),0.2987,0
+20251214_222552.JPG,Aspergillus,B: Otsu (global),0.5047,0
+20251214_222552.JPG,Aspergillus,C: Frangi + Otsu,0.2629,0
+20251214_222552.JPG,Aspergillus,D: Sauvola local,0.1125,0
+20251210_155519.JPG,Mucor,A: adaptive (current),0.2745,0
+20251210_155519.JPG,Mucor,B: Otsu (global),0.4334,0
+20251210_155519.JPG,Mucor,C: Frangi + Otsu,0.2514,0
+20251210_155519.JPG,Mucor,D: Sauvola local,0.0673,0
+20251210_155530.JPG,Mucor,A: adaptive (current),0.274,0
+20251210_155530.JPG,Mucor,B: Otsu (global),0.473,0
+20251210_155530.JPG,Mucor,C: Frangi + Otsu,0.2261,0
+20251210_155530.JPG,Mucor,D: Sauvola local,0.044,0
+20251210_155700.JPG,Mucor,A: adaptive (current),0.2389,0
+20251210_155700.JPG,Mucor,B: Otsu (global),0.2451,0
+20251210_155700.JPG,Mucor,C: Frangi + Otsu,0.1654,0
+20251210_155700.JPG,Mucor,D: Sauvola local,0.0286,0
+20251210_155743.JPG,Mucor,A: adaptive (current),0.2723,0
+20251210_155743.JPG,Mucor,B: Otsu (global),0.3532,0
+20251210_155743.JPG,Mucor,C: Frangi + Otsu,0.2278,0
+20251210_155743.JPG,Mucor,D: Sauvola local,0.0672,0
+20251210_155748.JPG,Mucor,A: adaptive (current),0.2615,0
+20251210_155748.JPG,Mucor,B: Otsu (global),0.3808,0
+20251210_155748.JPG,Mucor,C: Frangi + Otsu,0.2362,0
+20251210_155748.JPG,Mucor,D: Sauvola local,0.0199,0
+20251210_155753.JPG,Mucor,A: adaptive (current),0.2291,0
+20251210_155753.JPG,Mucor,B: Otsu (global),0.2678,0
+20251210_155753.JPG,Mucor,C: Frangi + Otsu,0.1654,0
+20251210_155753.JPG,Mucor,D: Sauvola local,0.0338,0
+20251210_155801.JPG,Mucor,A: adaptive (current),0.2412,0
+20251210_155801.JPG,Mucor,B: Otsu (global),0.3301,0
+20251210_155801.JPG,Mucor,C: Frangi + Otsu,0.1713,0
+20251210_155801.JPG,Mucor,D: Sauvola local,0.0227,0
+20251210_155811.JPG,Mucor,A: adaptive (current),0.2422,0
+20251210_155811.JPG,Mucor,B: Otsu (global),0.4404,0
+20251210_155811.JPG,Mucor,C: Frangi + Otsu,0.1591,0
+20251210_155811.JPG,Mucor,D: Sauvola local,0.0173,0
+20251210_155819.JPG,Mucor,A: adaptive (current),0.2625,0
+20251210_155819.JPG,Mucor,B: Otsu (global),0.3431,0
+20251210_155819.JPG,Mucor,C: Frangi + Otsu,0.1865,0
+20251210_155819.JPG,Mucor,D: Sauvola local,0.0305,0
+20251210_155850.JPG,Mucor,A: adaptive (current),0.2821,0
+20251210_155850.JPG,Mucor,B: Otsu (global),0.5243,0
+20251210_155850.JPG,Mucor,C: Frangi + Otsu,0.2311,0
+20251210_155850.JPG,Mucor,D: Sauvola local,0.0028,0
+20251210_155926.JPG,Mucor,A: adaptive (current),0.2768,0
+20251210_155926.JPG,Mucor,B: Otsu (global),0.3824,0
+20251210_155926.JPG,Mucor,C: Frangi + Otsu,0.2362,0
+20251210_155926.JPG,Mucor,D: Sauvola local,0.0277,0
